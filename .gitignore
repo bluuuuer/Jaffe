@@ -1,0 +1,14 @@
+# Windows:
+*.sdf
+*.sln
+*.suo
+Debug
+*.lastbuildstate
+*.obj
+*.pdb
+*.tlog
+*.unsuccessfulbuild
+*.idb
+*.log
+*.vcxproj
+*.filters
