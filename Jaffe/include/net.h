@@ -4,10 +4,10 @@
 #include <string>
 #include <vector>
 
-#include "Layer.h"
-#include "VisionLayer.h"
-#include "NetParameter.h"
-#include "DataLayer.h"
+#include "layer.h"
+#include "vision_layers.h"
+#include "net_param.h"
+#include "data_layers.h"
 
 using namespace std;
 
@@ -23,10 +23,10 @@ public:
 			delete[] this->conv_layers;
 		delete [] parameter;
 	};
-	bool Init();	// 分别给定义 layer 并设置参数
-	bool SetFilePath(const string filename); // 一次性读入所有参数
+	bool init();	// 分别给定义 layer 并设置参数
+	bool setFilePath(const string filename); // 一次性读入所有参数
 	//void Info();
-	NetParameter GetParame(){ return *this->parameter; };
+	NetParameter getParame(){ return *this->parameter; };
 private:
 	vector<Layer*> layers;
 

@@ -1,11 +1,11 @@
-#ifndef DATALAYERPARAMETER_H_H
-#define DATALAYERPARAMETER_H_H
+#ifndef DATA_LAYER_PARAM_H_H
+#define DATA_LAYER_PARAM_H_H
 
-#include "LayerParameter.h"
+#include "layer_param.h"
 
-class DataLayerParameter : public LayerParameter{
+class DataLayerParam : public LayerParam{
 public:
-	DataLayerParameter(){
+	DataLayerParam(){
 		this->source = "";
 		this->batch_size = 0;
 		this->rank_skip = 0;
@@ -17,9 +17,9 @@ public:
 		this->force_encoded_color = false;
 		this->prefetch = 0;
 	};
-	~DataLayerParameter(){};
-	bool SetParam(vector<string> param);
-	bool Show();
+	~DataLayerParam(){};
+	bool setParam(vector<string> param);
+	bool show();
 private:
 	enum DB{
 		LEVELDB = 0,

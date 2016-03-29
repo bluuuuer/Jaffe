@@ -1,5 +1,5 @@
-#ifndef PARAMSPEC_H_H
-#define PARAMSPEC_H_H
+#ifndef PARAM_SPEC_H_H
+#define PARAM_SPEC_H_H
 
 #include <string>
 #include <vector>
@@ -18,8 +18,8 @@ public:
 		this->share_mode = STRICT;
 	};
 	~ParamSpec(){};
-	bool SetParam(const vector<string> param);
-	void Show();
+	bool setParam(const vector<string> param);
+	void show();
 private:
 	// 独有参数
 	string name;
@@ -31,8 +31,8 @@ private:
 	float lr_mult;
 	float decay_mult;
 	// 正则表达式匹配
-	bool match_s(const string line, const string key, string* s);
-	bool match_f(const string line, const string key, float* f);
+	bool matchString(const string line, const string key, string* s);
+	bool matchFloat(const string line, const string key, float* f);
 
 };
 #endif

@@ -1,15 +1,15 @@
-#ifndef CONVLAYERPARAMETER_H_H
-#define CONVLAYERPARAMETER_H_H
+#ifndef CONVOLUTION_LAYER_PARAM_H_H
+#define CONVOLUTION_LAYER_PARAM_H_H
 
-#include "LayerParameter.h"
-#include "FillerParameter.h"
-#include "ParamSpec.h"
+#include "layer_param.h"
+#include "filler_param.h"
+#include "param_spec.h"
 
 using namespace std;
 
-class ConvLayerParameter : public LayerParameter{
+class ConvolutionLayerParam : public LayerParam{
 public:
-	ConvLayerParameter(){
+	ConvolutionLayerParam(){
 		this->num_output = 0;
 		this->bias_term = true;
 		this->pad_h = 0;
@@ -23,12 +23,12 @@ public:
 		this->axis = 1;
 		this->force_nd_im2col = false;
 	};
-	~ConvLayerParameter(){
+	~ConvolutionLayerParam(){
 		delete[] this->weight_filler;
 		delete[] this->bias_filler;
 	};
-	bool SetParam(vector<string> param);
-	bool Show();
+	bool setParam(vector<string> param);
+	bool show();
 
 private:
 	// 各种独有参数
@@ -44,8 +44,8 @@ private:
 	int stride_h;
 	int stride_w;
 	int group;
-	FillerParameter* weight_filler;
-	FillerParameter* bias_filler;
+	FillerParam* weight_filler;
+	FillerParam* bias_filler;
 	enum Engine{
 		DEFAULT = 0,
 		CAFFE = 1,

@@ -1,9 +1,9 @@
 #include <iostream>
 
-#include "Layer.h"
+#include "layer.h"
 
 using namespace std;
 
-bool Layer::SetSharedParam(const vector<string> param){
-	return this->parameter.SetSharedParam(param);
+bool Layer::setSharedParam(const vector<string> param){
+	return this->parameter->setSharedParam(param);
 }

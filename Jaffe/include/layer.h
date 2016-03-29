@@ -7,7 +7,7 @@
 #include <regex>
 #include <sstream>
 
-#include "LayerParameter.h"
+#include "layer_param.h"
 
 using namespace std;
 
@@ -16,19 +16,19 @@ public:
 	Layer(){
 	};
 	~Layer(){
-		if(this->parameter.GetTopNum()){
+		if(this->parameter->getTopNum()){
 			this->top.clear();
 			vector<Layer*>(this->top).swap(this->top); 
 		}
-		if(this->parameter.GetBottomNum()){
+		if(this->parameter->getBottomNum()){
 			this->bottom.clear();
 			vector<Layer*>(this->bottom).swap(this->bottom); 
 		}
 	};
-	virtual bool SetSharedParam(const vector<string> param);
-	virtual void Forward(){};
-	string GetType(){ return this->parameter.GetType(); };
-	virtual bool Show(){ return true; };
+	virtual bool setSharedParam(const vector<string> param);
+	virtual void forward(){};
+	string getType(){ return this->parameter->getType(); };
+	virtual bool show(){ return this->parameter->show(); };
 
 protected:
 	string* top_s;
@@ -38,6 +38,6 @@ protected:
 	vector<Layer*> bottom;
 
 private:
-	LayerParameter parameter;
+	LayerParam* parameter;
 };
 #endif

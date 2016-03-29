@@ -1,6 +1,6 @@
 //Net 参数头文件
-#ifndef NETPARAMETER_H_H
-#define NETPARAMETER_H_H
+#ifndef NET_PARAM_H_H
+#define NET_PARAM_H_H
 
 #include <string>
 #include <regex>
@@ -18,16 +18,16 @@ public:
 	};
 	~NetParameter(){};
 	// 设置参数文件路径
-	bool SetFilePath(const string filepath){ 
+	bool setFilePath(const string filepath){ 
 		this->filepath = filepath; 
-		return ReadParamFromText();
+		return readParamFromText();
 	};
 	// 从文件中读取所有 layer 参数
-	bool ReadParamFromText();
+	bool readParamFromText();
 
-	int GetLayerNum(){ return this->layer_num; };
+	int getLayerNum(){ return this->layer_num; };
 	// 返回指定索引位置的layer参数
-	vector<string> GetLayerParam(int idex){
+	vector<string> getLayerParam(int idex){
 		return this->layers_param[idex];
 	}
 private:
@@ -37,7 +37,7 @@ private:
 	vector<vector<string>> layers_param;  // 所有的 layer 参数
 
 	// 读取参数时使用正则表达式匹配
-	bool match_s(const string line, const string key, string* s);
+	bool matchString(const string line, const string key, string* s);
 };
 
 #endif

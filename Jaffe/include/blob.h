@@ -2,7 +2,7 @@
 
 #include <string>
 #include <vector>
-#include "math_functions.h"
+//#include "math_functions.h"
 namespace Jaffe {
 
 	template <typename DataType>

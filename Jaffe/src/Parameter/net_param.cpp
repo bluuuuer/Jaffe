@@ -1,4 +1,4 @@
-#include "NetParameter.h"
+#include "net_param.h"
 
 bool NPisleft(char c){
 	return c == '{';
@@ -8,7 +8,7 @@ bool NPisright(char c){
 	return c == '}';
 }
 
-bool NetParameter::ReadParamFromText(){
+bool NetParameter::readParamFromText(){
 	// 打开文件
 	ifstream fin;
 	fin.open(this->filepath);
@@ -26,7 +26,7 @@ bool NetParameter::ReadParamFromText(){
 	while (getline(fin, line)){
 		if (!enter_layer){// 防止同一 layer 中更深的位置有 name 参数出现
 			if (line.find("name:") != string::npos)
-				match_s(line, "name:", &this->name);
+				matchString(line, "name:", &this->name);
 			if (line.find("layer") != string::npos){
 				enter_layer = true;
 				this->layer_num++;
@@ -54,7 +54,7 @@ bool NetParameter::ReadParamFromText(){
 	return true;
 }
 
-bool NetParameter::match_s(const string line, const string key, string* s){
+bool NetParameter::matchString(const string line, const string key, string* s){
 	const std::regex pattern(key + "( )?(\")(\\w+)(\")");
 	std::match_results<string::const_iterator> result;
 	bool vaild = std::regex_search(line, result, pattern);

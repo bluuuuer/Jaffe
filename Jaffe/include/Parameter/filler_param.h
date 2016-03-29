@@ -1,5 +1,5 @@
-#ifndef FILLERPARAMETER_H_H
-#define FILLERPARAMETER_H_H
+#ifndef FILLE_RPARAM_H_H
+#define FILLE_RPARAM_H_H
 
 #include <iostream>
 #include <string>
@@ -9,9 +9,9 @@
 
 using namespace std;
 
-class FillerParameter{
+class FillerParam{
 public:
-	FillerParameter(){
+	FillerParam(){
 		this->type = "constant";
 		this->value = 0;
 		this->min = 0;
@@ -21,9 +21,9 @@ public:
 		this->sparse = -1;
 		this->variance_norm = FAN_IN;
 	};
-	~FillerParameter(){};
-	bool SetParameter(const vector<string> param);
-	void Show();
+	~FillerParam(){};
+	bool setParameter(const vector<string> param);
+	void show();
 private:
 	// 独有参数
 	string type;
@@ -42,8 +42,8 @@ private:
 	VarianceNorm variance_norm;
 
 	// 正则表达式匹配
-	bool match_s(const string line, const string key, string* s);
-	bool match_i(const string line, const string key, int *i);
-	bool match_f(const string line, const string key, float* f);
+	bool matchString(const string line, const string key, string* s);
+	bool matchInt(const string line, const string key, int *i);
+	bool matchFloat(const string line, const string key, float* f);
 };
 #endif

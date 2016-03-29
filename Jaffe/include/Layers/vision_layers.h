@@ -1,8 +1,8 @@
 #ifndef VISION_LAYERS_H_H
 #define VISION_LAYERS_H_H
 
-#include "Layer.h"
-#include "ConvLayerParameter.h"
+#include "layer.h"
+#include "convolution_layer_param.h"
 
 using namespace std;
 
@@ -15,16 +15,16 @@ public:
 class ConvolutionLayer : public BaseConvolutionLayer{
 public:
 	ConvolutionLayer(){
-		this->parameter = new ConvLayerParameter;
+		this->parameter = new ConvolutionLayerParam;
 	};
 	~ConvolutionLayer(){
 		delete[] this->parameter;
 	};
-	virtual void Forward();
-	bool SetParam(vector<string> param);
+	virtual void forward();
+	bool setParam(vector<string> param);
 	// 输出显示所有参数，测试用
-	virtual bool Show(){ return this->parameter->Show(); };
+	virtual bool show(){ return this->parameter->show(); };
 private:
-	ConvLayerParameter* parameter;
+	ConvolutionLayerParam* parameter;
 };
 #endif
