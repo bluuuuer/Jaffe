@@ -4,38 +4,38 @@
 #include "layer_param.h"
 
 namespace jaffe {
-	class DataLayerParam : public LayerParam{
+	class JDataLayerParam : public JLayerParam{
 	public:
-		DataLayerParam(){
-			this->source = "";
-			this->batch_size = 0;
-			this->rank_skip = 0;
-			this->backend = LEVELDB;
-			this->scale = 1.0;
-			this->mean_file = "";
-			this->crop_size = 0;
-			this->mirror = false;
-			this->force_encoded_color = false;
-			this->prefetch = 0;
+		JDataLayerParam(){
+			m_source = "";
+			m_batch_size = 0;
+			m_rank_skip = 0;
+			m_backend = LEVELDB;
+			m_scale = 1.0;
+			m_mean_file = "";
+			m_crop_size = 0;
+			m_mirror = false;
+			m_force_encoded_color = false;
+			m_prefetch = 0;
 		};
-		~DataLayerParam(){};
-		bool setParam(vector<string> param);
-		bool show();
+		~JDataLayerParam(){};
+		bool SetParam(vector<string> param);
+		bool Show();
 	private:
 		enum DB{
 			LEVELDB = 0,
 			LMDB = 1
 		};
-		string source;
-		int batch_size;
-		int rank_skip;
-		DB backend;
-		float scale;
-		string mean_file;
-		int crop_size;
-		bool mirror;
-		bool force_encoded_color;
-		int prefetch;
+		string m_source;
+		int m_batch_size;
+		int m_rank_skip;
+		DB m_backend;
+		float m_scale;
+		string m_mean_file;
+		int m_crop_size;
+		bool m_mirror;
+		bool m_force_encoded_color;
+		int m_prefetch;
 	};
 }
 #endif

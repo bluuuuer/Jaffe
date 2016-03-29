@@ -15,32 +15,32 @@ using std::endl;
 
 namespace jaffe {
 
-	class Net{
+	class JNet{
 	public:
-		Net(){
-			parameter = new NetParameter;
-			this->data_layer_num = 0;
-			this->conv_layer_num = 0;
+		JNet(){
+			m_parameter = new JNetParameter;
+			m_data_layer_num = 0;
+			m_conv_layer_num = 0;
 		};
-		~Net(){
-			if (this->conv_layer_num)
-				delete[] this->conv_layers;
-			delete[] parameter;
+		~JNet(){
+			if (m_conv_layer_num)
+				delete[] m_conv_layers;
+			delete[] m_parameter;
 		};
-		bool init();	// 分别给定义 layer 并设置参数
-		bool setFilePath(const string filename); // 一次性读入所有参数
+		bool Init();	// 分别给定义 layer 并设置参数
+		bool SetFilePath(const string filename); // 一次性读入所有参数
 		//void Info();
-		NetParameter getParame(){ return *this->parameter; };
+		JNetParameter GetParame(){ return *m_parameter; };
 	private:
-		vector<Layer*> layers;
+		vector<JLayer*> m_layers;
 
-		int data_layer_num;
-		DataLayer* data_layers;
+		int m_data_layer_num;
+		JDataLayer* m_data_layers;
 
-		int conv_layer_num;
-		ConvolutionLayer* conv_layers;
+		int m_conv_layer_num;
+		JConvolutionLayer* m_conv_layers;
 
-		NetParameter* parameter;
+		JNetParameter* m_parameter;
 	};
 }
 #endif

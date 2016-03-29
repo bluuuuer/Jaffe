@@ -4,7 +4,7 @@
 
 namespace jaffe {
 
-	bool Layer::setSharedParam(const vector<string> param){
-		return this->parameter->setSharedParam(param);
+	bool JLayer::SetSharedParam(const vector<string> param){
+		return m_parameter->SetSharedParam(param);
 	}
-}
+} // namespace jaffe

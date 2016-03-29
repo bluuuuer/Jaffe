@@ -15,37 +15,37 @@ using std::vector;
 using std::endl;
 
 namespace jaffe {
-	class FillerParam{
+	class JFillerParam{
 	public:
-		FillerParam(){
-			this->type = "constant";
-			this->value = 0;
-			this->min = 0;
-			this->max = 1;
-			this->mean = 0;
-			this->std = 1;
-			this->sparse = -1;
-			this->variance_norm = FAN_IN;
+		JFillerParam(){
+			m_type = "constant";
+			m_value = 0;
+			m_min = 0;
+			m_max = 1;
+			m_mean = 0;
+			m_std = 1;
+			m_sparse = -1;
+			m_variance_norm = FAN_IN;
 		};
-		~FillerParam(){};
-		bool setParameter(const vector<string> param);
-		void show();
+		~JFillerParam(){};
+		bool SetParameter(const vector<string> param);
+		void Show();
 	private:
 		// 独有参数
-		string type;
-		float value;
-		float min;
-		float max;
-		float mean;
-		float std;
-		int sparse;
+		string m_type;
+		float m_value;
+		float m_min;
+		float m_max;
+		float m_mean;
+		float m_std;
+		int m_sparse;
 
 		enum VarianceNorm{
 			FAN_IN = 0,
 			FAN_OUT = 1,
 			AVERAGE = 2
 		};
-		VarianceNorm variance_norm;
+		VarianceNorm m_variance_norm;
 
 		// 正则表达式匹配
 		//bool matchString(const string line, const string key, string* s);

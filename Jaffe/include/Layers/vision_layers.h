@@ -6,26 +6,26 @@
 
 namespace jaffe {
 
-	class BaseConvolutionLayer : public Layer{
+	class JBaseConvolutionLayer : public JLayer{
 	public:
-		BaseConvolutionLayer(){};
-		~BaseConvolutionLayer(){};
+		JBaseConvolutionLayer(){};
+		~JBaseConvolutionLayer(){};
 	};
 
-	class ConvolutionLayer : public BaseConvolutionLayer{
+	class JConvolutionLayer : public JBaseConvolutionLayer{
 	public:
-		ConvolutionLayer(){
-			this->parameter = new ConvolutionLayerParam;
+		JConvolutionLayer(){
+			m_parameter = new JConvolutionLayerParam;
 		};
-		~ConvolutionLayer(){
-			delete[] this->parameter;
+		~JConvolutionLayer(){
+			delete[] m_parameter;
 		};
-		virtual void forward();
-		bool setParam(vector<string> param);
+		virtual void Forward();
+		bool SetParam(vector<string> param);
 		// 输出显示所有参数，测试用
-		virtual bool show(){ return this->parameter->show(); };
+		virtual bool Show(){ return m_parameter->Show(); };
 	private:
-		ConvolutionLayerParam* parameter;
+		JConvolutionLayerParam* m_parameter;
 	};
 }
 #endif

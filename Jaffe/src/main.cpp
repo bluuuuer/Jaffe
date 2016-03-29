@@ -8,12 +8,12 @@ using std::string;
 using std::endl;
 
 int main(){
-	Net net;
+	JNet net;
 
 	// 读取配置文件并初始化网络
-	if(!net.setFilePath("train_val.prototxt"))
+	if(!net.SetFilePath("train_val.prototxt"))
 		cout << "Failed to Read Net Parameter" << endl;
-	net.init();
+	net.Init();
 
 	return 0;
 }

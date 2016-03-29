@@ -5,31 +5,31 @@
 #include "data_layer_param.h"
 
 namespace jaffe {
-	class BaseDataLayer : public Layer{
+	class JBaseDataLayer : public JLayer{
 	public:
-		BaseDataLayer(){};
-		~BaseDataLayer(){};
+		JBaseDataLayer(){};
+		~JBaseDataLayer(){};
 	protected:
 		//TransformationParameter transform_param;
 		//vector<DataTransformer*> data_transformer;
 	};
 
-	class BasePrefetchingDataLayer : public BaseDataLayer{
+	class JBasePrefetchingDataLayer : public JBaseDataLayer{
 	public:
-		BasePrefetchingDataLayer(){};
-		~BasePrefetchingDataLayer(){};
+		JBasePrefetchingDataLayer(){};
+		~JBasePrefetchingDataLayer(){};
 	};
 
-	class DataLayer : public  BasePrefetchingDataLayer{
+	class JDataLayer : public  JBasePrefetchingDataLayer{
 	public:
-		DataLayer(){
-			this->parameter = new DataLayerParam;
+		JDataLayer(){
+			m_parameter = new JDataLayerParam;
 		};
-		~DataLayer(){};
-		bool setParam(vector<string> param);
-		virtual void forward();
+		~JDataLayer(){};
+		bool SetParam(vector<string> param);
+		virtual void Forward();
 	private:
-		DataLayerParam* parameter;
+		JDataLayerParam* m_parameter;
 	};
 
 }

@@ -43,4 +43,4 @@ namespace jaffe{
 		*b = false;
 		return false;
 	}
-}
+} // namespace jaffe

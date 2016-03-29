@@ -11,7 +11,7 @@ namespace jaffe {
 	}
 
 
-	bool LayerParam::setSharedParam(const vector<string> param){
+	bool JLayerParam::SetSharedParam(const vector<string> param){
 		string line;
 		bool enter_param_spec = false;
 		vector<string> temp_s_v;
@@ -19,16 +19,16 @@ namespace jaffe {
 		for (int i = 0; i < param.size(); i++){
 			line = param.at(i);
 			if (!enter_param_spec){
-				if (matchString(line, "type:", &this->type))
-					this->type = true;
+				if (matchString(line, "type:", &m_type))
+					m_type = true;
 
-				if (matchString(line, "name:", &this->name))
-					this->name = true;
+				if (matchString(line, "name:", &m_name))
+					m_name = true;
 
 				if (line.find("top") != string::npos)
-					this->top_num++;
+					m_top_num++;
 				if (line.find("bottom") != string::npos)
-					this->bottom_num++;
+					m_bottom_num++;
 			}
 			// 进入 param_spec 参数空间
 			if (line.find("param") != string::npos &&
@@ -43,9 +43,9 @@ namespace jaffe {
 				left -= count_if(line.begin(), line.end(), LPisright);
 				if (left == 0){
 					temp_s_v.pop_back();
-					ParamSpec param_spec_temp;	// 可以有多个 param_spec 参数空间
-					param_spec_temp.setParam(temp_s_v);
-					this->param_spec.push_back(param_spec_temp);
+					JParamSpec param_spec_temp;	// 可以有多个 param_spec 参数空间
+					param_spec_temp.SetParam(temp_s_v);
+					m_param_spec.push_back(param_spec_temp);
 					temp_s_v.clear();
 					enter_param_spec = false;
 				}
@@ -56,48 +56,4 @@ namespace jaffe {
 		return true;
 
 	}
-}
-
-/*-------将 line 中 key 后双引号中内容赋给 s，若没有 key 则返回 false-------*/
-//bool LayerParam::matchString(const string line, const string key, string* s){
-//	const std::regex pattern(key + "( )?(\")(\\w+)(\")");
-//	std::match_results<string::const_iterator> result;
-//	bool vaild = std::regex_search(line, result, pattern);
-//	if (vaild)
-//		*s = result[3];
-//	return vaild;
-//}
-//
-//bool LayerParam::matchInt(const string line, const string key, int* i){
-//	const std::regex pattern(key + "( )?(\\d{1,5})");
-//	std::match_results<string::const_iterator> result;
-//	bool vaild = std::regex_search(line, result, pattern);
-//	stringstream ss;
-//	ss << result[2];
-//	if (vaild)
-//		ss >> *i;
-//	return vaild;
-//}
-//
-//bool LayerParam::matchFloat(const string line, const string key, float* f){
-//	const std::regex pattern(key + "( )?(\\d{1,5})(.)(\\d{1,5})");
-//	std::match_results<string::const_iterator> result;
-//	bool vaild = std::regex_search(line, result, pattern);
-//	string s = result[2];
-//	s += result[3];
-//	s += result[4];
-//	stringstream ss;
-//	ss << s;
-//	if (vaild)
-//		ss >> *f;
-//	return vaild;
-//}
-//
-//bool LayerParam::matchBool(const string line, const string key, bool* b){
-//	if (line.find("true") != string::npos){
-//		*b = true;
-//		return true;
-//	}
-//	*b = false;
-//	return false;
-//}
+} // namespace jaffe

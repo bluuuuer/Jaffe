@@ -16,34 +16,34 @@ using std::endl;
 
 namespace jaffe {
 
-	class Layer{
+	class JLayer{
 	public:
-		Layer(){
+		JLayer(){
 		};
-		~Layer(){
-			if (this->parameter->getTopNum()){
-				this->top.clear();
-				vector<Layer*>(this->top).swap(this->top);
+		~JLayer(){
+			if (m_parameter->GetTopNum()){
+				m_top.clear();
+				vector<JLayer*>(m_top).swap(m_top);
 			}
-			if (this->parameter->getBottomNum()){
-				this->bottom.clear();
-				vector<Layer*>(this->bottom).swap(this->bottom);
+			if (m_parameter->GetBottomNum()){
+				m_bottom.clear();
+				vector<JLayer*>(m_bottom).swap(m_bottom);
 			}
 		};
-		virtual bool setSharedParam(const vector<string> param);
-		virtual void forward(){};
-		string getType(){ return this->parameter->getType(); };
-		virtual bool show(){ return this->parameter->show(); };
+		virtual bool SetSharedParam(const vector<string> param);
+		virtual void Forward(){};
+		string GetType(){ return m_parameter->GetType(); };
+		virtual bool Show(){ return m_parameter->Show(); };
 
 	protected:
-		string* top_s;
-		vector<Layer*> top;
+		string* m_top_s;
+		vector<JLayer*> m_top;
 
-		string* bottom_s;
-		vector<Layer*> bottom;
+		string* m_bottom_s;
+		vector<JLayer*> m_bottom;
 
 	private:
-		LayerParam* parameter;
+		JLayerParam* m_parameter;
 	};
 }
 #endif

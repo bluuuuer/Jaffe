@@ -1,11 +1,11 @@
 #include "vision_layers.h"
 
 namespace jaffe {
-	bool ConvolutionLayer::setParam(vector<string> param){
-		return this->parameter->setParam(param);
+	bool JConvolutionLayer::SetParam(vector<string> param){
+		return m_parameter->SetParam(param);
 	}
 
-	void ConvolutionLayer::forward(){
+	void JConvolutionLayer::Forward(){
 
 	}
 }

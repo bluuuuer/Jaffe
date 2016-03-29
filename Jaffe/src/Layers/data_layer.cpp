@@ -1,11 +1,11 @@
 #include "data_layers.h"
 
 namespace jaffe {
-	bool DataLayer::setParam(vector<string> param){
-		return this->parameter->setParam(param);
+	bool JDataLayer::SetParam(vector<string> param){
+		return m_parameter->SetParam(param);
 	}
 
-	void DataLayer::forward(){
+	void JDataLayer::Forward(){
 
 	}
 }
