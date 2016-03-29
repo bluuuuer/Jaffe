@@ -9,35 +9,41 @@
 
 #include "layer_param.h"
 
-using namespace std;
+using std::string;
+using std::cout;
+using std::vector;
+using std::endl;
 
-class Layer{
-public:
-	Layer(){
+namespace jaffe {
+
+	class Layer{
+	public:
+		Layer(){
+		};
+		~Layer(){
+			if (this->parameter->getTopNum()){
+				this->top.clear();
+				vector<Layer*>(this->top).swap(this->top);
+			}
+			if (this->parameter->getBottomNum()){
+				this->bottom.clear();
+				vector<Layer*>(this->bottom).swap(this->bottom);
+			}
+		};
+		virtual bool setSharedParam(const vector<string> param);
+		virtual void forward(){};
+		string getType(){ return this->parameter->getType(); };
+		virtual bool show(){ return this->parameter->show(); };
+
+	protected:
+		string* top_s;
+		vector<Layer*> top;
+
+		string* bottom_s;
+		vector<Layer*> bottom;
+
+	private:
+		LayerParam* parameter;
 	};
-	~Layer(){
-		if(this->parameter->getTopNum()){
-			this->top.clear();
-			vector<Layer*>(this->top).swap(this->top); 
-		}
-		if(this->parameter->getBottomNum()){
-			this->bottom.clear();
-			vector<Layer*>(this->bottom).swap(this->bottom); 
-		}
-	};
-	virtual bool setSharedParam(const vector<string> param);
-	virtual void forward(){};
-	string getType(){ return this->parameter->getType(); };
-	virtual bool show(){ return this->parameter->show(); };
-
-protected:
-	string* top_s;
-	vector<Layer*> top;
-
-	string* bottom_s;
-	vector<Layer*> bottom;
-
-private:
-	LayerParam* parameter;
-};
+}
 #endif

@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 //#include "math_functions.h"
-namespace Jaffe {
+namespace jaffe {
 
 	template <typename DataType>
 	class BLob

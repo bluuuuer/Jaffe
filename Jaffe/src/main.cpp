@@ -2,7 +2,10 @@
 
 #include "net.h"
 
-using namespace std;
+using namespace jaffe;
+using std::cout;
+using std::string;
+using std::endl;
 
 int main(){
 	Net net;

@@ -2,8 +2,9 @@
 
 #include "layer.h"
 
-using namespace std;
+namespace jaffe {
 
-bool Layer::setSharedParam(const vector<string> param){
-	return this->parameter->setSharedParam(param);
+	bool Layer::setSharedParam(const vector<string> param){
+		return this->parameter->setSharedParam(param);
+	}
 }

@@ -4,32 +4,33 @@
 #include "layer.h"
 #include "data_layer_param.h"
 
-class BaseDataLayer : public Layer{
-public:
-	BaseDataLayer(){};
-	~BaseDataLayer(){};
-protected:
-	//TransformationParameter transform_param;
-	//vector<DataTransformer*> data_transformer;
-};
-
-class BasePrefetchingDataLayer : public BaseDataLayer{
-public:
-	BasePrefetchingDataLayer(){};
-	~BasePrefetchingDataLayer(){};
-};
-
-class DataLayer : public  BasePrefetchingDataLayer{
-public:
-	DataLayer(){
-		this->parameter = new DataLayerParam;
+namespace jaffe {
+	class BaseDataLayer : public Layer{
+	public:
+		BaseDataLayer(){};
+		~BaseDataLayer(){};
+	protected:
+		//TransformationParameter transform_param;
+		//vector<DataTransformer*> data_transformer;
 	};
-	~DataLayer(){};
-	bool setParam(vector<string> param);
-	virtual void forward();
-private:
-	DataLayerParam* parameter;
-};
 
+	class BasePrefetchingDataLayer : public BaseDataLayer{
+	public:
+		BasePrefetchingDataLayer(){};
+		~BasePrefetchingDataLayer(){};
+	};
 
+	class DataLayer : public  BasePrefetchingDataLayer{
+	public:
+		DataLayer(){
+			this->parameter = new DataLayerParam;
+		};
+		~DataLayer(){};
+		bool setParam(vector<string> param);
+		virtual void forward();
+	private:
+		DataLayerParam* parameter;
+	};
+
+}
 #endif
