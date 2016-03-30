@@ -17,5 +17,10 @@ namespace jaffe {
 	bool matchFloat(const string line, const string key, float* f);
 
 	bool matchBool(const string line, const string key, bool* b);
+
+	bool matchDouble(const string line, const string key, double* d);
+
+	bool matchLong(const string line, const string key, long *l);
+
 }	//	namespace jaffe
 #endif

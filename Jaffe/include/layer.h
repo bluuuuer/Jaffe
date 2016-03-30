@@ -16,6 +16,7 @@ using std::endl;
 
 namespace jaffe {
 
+	template <typename Dtype>
 	class JLayer{
 	public:
 		JLayer(){
@@ -31,7 +32,7 @@ namespace jaffe {
 			}
 		};
 		virtual bool SetSharedParam(const vector<string> param);
-		virtual void Forward(){};
+		virtual Dtype Forward(){};
 		string GetType(){ return m_parameter->GetType(); };
 		virtual bool Show(){ return m_parameter->Show(); };
 

@@ -3,29 +3,72 @@
 
 #include "layer.h"
 #include "convolution_param.h"
+#include "pooling_param.h"
 
 namespace jaffe {
 
-	class JBaseConvolutionLayer : public JLayer{
+	template <typename Dtype>
+	class JBaseConvolutionLayer : public JLayer<Dtype>{
 	public:
 		JBaseConvolutionLayer(){};
+
 		~JBaseConvolutionLayer(){};
+
 	};
 
-	class JConvolutionLayer : public JBaseConvolutionLayer{
+	template <typename Dtype>
+	class JConvolutionLayer : public JBaseConvolutionLayer<Dtype>{
 	public:
 		JConvolutionLayer(){
-			m_parameter = new JConvolutionParam;
+			m_param = new JConvolutionParam;
 		};
+
 		~JConvolutionLayer(){
-			delete[] m_parameter;
+			delete[] m_param;
 		};
-		virtual void Forward();
-		bool SetParam(vector<string> param);
-		// 输出显示所有参数，测试用
-		virtual bool Show(){ return m_parameter->Show(); };
+
+		bool Init(const vector<string> param);
+
+		virtual bool Show();
+
+		virtual Dtype Forward(/*const vector<Blob<Dtype>*>& bottom, 
+							 const vector<Blob<Dtype>*>& top*/);
+
 	private:
-		JConvolutionParam* m_parameter;
+		JConvolutionParam* m_param;
+	};
+
+	template <typename Dtype>
+	class JPoolingLayer : public Layer<Dtype> {
+	public:
+		JPoolingLayer(){
+			m_param = new JPoolingParam;
+		};
+
+		~JPoolingLayer(){
+			delete[] m_param;
+		};
+
+		bool Init(const vector<string> param);
+
+		virtual Dtype Forward(/*const vector<Blob<Dtype>*>& bottom,
+							  const vector<Blob<Dtype>*>& top*/);
+
+		bool SetParam(const vector<string> param);
+
+		bool ReadParam();
+
+	private:
+		JPoolingParam* m_param;
+
+		int m_kernel_h, m_kernel_w;
+		int m_stride_h, m_stride_w;
+		int m_pad_h, m_pad_w;
+		int m_channels;
+		int m_height, m_width;
+		int m_pooled_height, m_pooled_width;
+		bool m_global_pooling;
+
 	};
 }
 #endif

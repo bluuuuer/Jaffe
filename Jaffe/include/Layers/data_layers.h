@@ -5,7 +5,8 @@
 #include "data_param.h"
 
 namespace jaffe {
-	class JBaseDataLayer : public JLayer{
+	template <typename Dtype>
+	class JBaseDataLayer : public JLayer<Dtype>{
 	public:
 		JBaseDataLayer(){};
 		~JBaseDataLayer(){};
@@ -14,22 +15,26 @@ namespace jaffe {
 		//vector<DataTransformer*> data_transformer;
 	};
 
-	class JBasePrefetchingDataLayer : public JBaseDataLayer{
+	template <typename Dtype>
+	class JBasePrefetchingDataLayer : public JBaseDataLayer<Dtype>{
 	public:
 		JBasePrefetchingDataLayer(){};
 		~JBasePrefetchingDataLayer(){};
 	};
 
-	class JDataLayer : public  JBasePrefetchingDataLayer{
+	template <typename Dtype>
+	class JDataLayer : public  JBasePrefetchingDataLayer<Dtype>{
 	public:
 		JDataLayer(){
-			m_parameter = new JDataParam;
+			m_param = new JDataParam;
 		};
-		~JDataLayer(){};
-		bool SetParam(vector<string> param);
+		~JDataLayer(){
+			delete[] m_param;
+		};
+		bool Init(vector<string> param);
 		virtual void Forward();
 	private:
-		JDataParam* m_parameter;
+		JDataParam* m_param;
 	};
 
 }

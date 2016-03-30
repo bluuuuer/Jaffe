@@ -11,9 +11,7 @@ int main(){
 	JNet net;
 
 	// 读取配置文件并初始化网络
-	if(!net.SetFilePath("deploy.prototxt"))
-		cout << "Failed to Read Net Parameter" << endl;
-	net.Init();
+	net.Init("deploy.prototxt");
 
 	return 0;
 }

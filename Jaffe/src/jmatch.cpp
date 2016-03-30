@@ -5,8 +5,9 @@ namespace jaffe{
 		const std::regex pattern(key + "( )?(\")(\\w+)(\")");
 		std::match_results<string::const_iterator> result;
 		bool vaild = std::regex_search(line, result, pattern);
-		if (vaild)
+		if (vaild){
 			*s = result[3];
+		}
 		return vaild;
 	}
 
@@ -16,8 +17,9 @@ namespace jaffe{
 		bool vaild = std::regex_search(line, result, pattern);
 		stringstream ss;
 		ss << result[2];
-		if (vaild)
+		if (vaild){
 			ss >> *i;
+		}
 		return vaild;
 	}
 
@@ -30,8 +32,9 @@ namespace jaffe{
 		s += result[4];
 		stringstream ss;
 		ss << s;
-		if (vaild)
+		if (vaild){
 			ss >> *f;
+		}
 		return vaild;
 	}
 
@@ -43,4 +46,32 @@ namespace jaffe{
 		*b = false;
 		return false;
 	}
+
+	bool matchDouble(const string line, const string key, double* d){
+		const std::regex pattern(key + "( )?(\\d{1,10})(.)(\\d{1,10})");
+		std::match_results<string::const_iterator> result;
+		bool vaild = std::regex_search(line, result, pattern);
+		string s = result[2];
+		s += result[3];
+		s += result[4];
+		stringstream ss;
+		ss << s;
+		if (vaild){
+			ss >> *d;
+		}
+		return vaild;
+	}
+
+	bool matchLong(const string line, const string key, long *l){
+		const std::regex pattern(key + "( )?(\\d{1,10})");
+		std::match_results<string::const_iterator> result;
+		bool vaild = std::regex_search(line, result, pattern);
+		stringstream ss;
+		ss << result[2];
+		if (vaild){
+			ss >> *l;
+		}
+		return vaild;
+	}
+
 } // namespace jaffe

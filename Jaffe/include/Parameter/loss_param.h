@@ -1,11 +1,17 @@
 #ifndef LOSS_PARAM_H_H
 #define LOSS_PARAM_H_H
 
-#include "layer_param.h"
+#include <vector>
+#include <string>
+
+#include "jmatch.h"
+
+using std::vector; 
+using std::string;
 
 namespace jaffe{
 
-	class JLossParam : public JLayerParam{
+	class JLossParam{
 	public:
 		JLossParam(){
 			m_ignore_label = 0;
@@ -26,7 +32,6 @@ namespace jaffe{
 		NormalizationMode m_normalization;
 		bool m_normalize;
 		
-		bool SetUniqueParam(const vector<string> param);
 	};
 } // namespace jaffe
 

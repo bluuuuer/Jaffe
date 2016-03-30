@@ -10,6 +10,7 @@
 #include <sstream>
 
 #include "jmatch.h"
+#include "blob_shape.h"
 
 using std::string; 
 using std::cout;
@@ -26,7 +27,12 @@ namespace jaffe {
 			m_force_backward = false;
 			m_debug_info = false;
 		};
-		~JNetParameter(){};
+		~JNetParameter(){
+			vector<string>(m_input).swap(m_input);
+			vector<JBlobShape>(m_input_shape).swap(m_input_shape);
+			vector<int>(m_input_dim).swap(m_input_dim);
+			vector<vector<string>>(m_layers_param).swap(m_layers_param);
+		};
 		// 设置参数文件路径
 		bool SetFilePath(const string filepath){
 			m_filepath = filepath;
@@ -45,7 +51,7 @@ namespace jaffe {
 
 		string m_name; // 参数 name
 		vector<string> m_input;
-		//vector<JBlobShape> m_input_shape;
+		vector<JBlobShape> m_input_shape;
 		vector<int> m_input_dim;
 		bool m_force_backward;
 		//NetState* state;
