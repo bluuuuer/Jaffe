@@ -32,17 +32,18 @@ namespace jaffe {
 			vector<string>(m_bottom).swap(m_bottom);
 			vector<string>(m_top).swap(m_top);
 			vector<float>(m_loss_weight).swap(m_loss_weight);
-			vector<JParamSpec>(m_param_spec).swap(m_param_spec);
+			vector<JParamSpec>(m_param).swap(m_param);
 			vector<JBlobProto>(m_blobs).swap(m_blobs);
 			vector<bool>(m_propagate_down).swap(m_propagate_down);
 			vector<JNetStateRule>(m_include).swap(m_include);
 			vector<JNetStateRule>(m_exclude).swap(m_exclude);
 
+			delete[] m_transform_param;
 			delete[] m_loss_param;
 		};
 		// 读取所有层都会有的共享参数， 每个 layer 都必须调用
 		bool SetSharedParam(const vector<string> param);
-		bool Show(){ return true; };
+		bool ShowSharedParam();
 
 		int GetTopNum(){ return m_top.size(); };
 		int GetBottomNum(){ return m_bottom.size(); };
@@ -56,12 +57,12 @@ namespace jaffe {
 		vector<string> m_top;
 		//Phase m_phase;
 		vector<float> m_loss_weight;
-		vector<JParamSpec> m_param_spec;
+		vector<JParamSpec> m_param;
 		vector<JBlobProto> m_blobs;
 		vector<bool> m_propagate_down;
 		vector<JNetStateRule> m_include;
 		vector<JNetStateRule> m_exclude;
-		JTransformationParam* m_transfrom_param;
+		JTransformationParam* m_transform_param;
 		JLossParam* m_loss_param;
 	private:
 	};

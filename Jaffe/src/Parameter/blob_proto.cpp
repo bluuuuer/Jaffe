@@ -31,4 +31,25 @@ namespace jaffe {
 		return true;
 	}
 
+	bool JBlobProto::Show(){
+		cout << "blob_proto: " << endl;
+		cout << "\tdata:" << m_data << endl;
+		for (int i = 0; i < m_diff.size(); i++){
+			cout << "\tdiff[" << i << "]: " << m_diff.at(i) << endl;
+		}
+		for (int i = 0; i < m_double_data.size(); i++){
+			cout << "\tdouble_data[" << i << "]: " << 
+				m_double_data.at(i) << endl;
+		}
+		for (int i = 0; i < m_double_diff.size(); i++){
+			cout << "\tdouble_diff[" << i << "]: " <<
+				m_double_diff.at(i) << endl;
+		}
+		cout << "\tnum: " << m_num << endl;
+		cout << "\tchannels: " << m_channels << endl;
+		cout << "\theight: " << m_height << endl;
+		cout << "\twidth: " << m_width << endl;
+		return true;
+	}
+
 } // namespace jaffe

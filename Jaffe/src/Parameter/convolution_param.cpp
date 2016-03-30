@@ -135,18 +135,21 @@ namespace jaffe {
 
 	bool JConvolutionParam::Show(){
 		cout << endl;
-		cout << "name: " << m_name << endl;
-		cout << "type: " << m_type << endl;
+		cout << "Convolution Layer (" << m_name << "):" << endl;
+		ShowSharedParam();
 		cout << "num_output: " << m_num_output << endl;
-		for (int i = 0; i < m_kernel_size.size(); i++)
-			cout << "kernel_size[" << i << "]: " << 
-			m_kernel_size[i]
-			<< endl;
-		for (int i = 0; i < m_pad.size(); i++)
+		cout << "m_bias_term: " << m_bias_term << endl;
+		for (int i = 0; i < m_kernel_size.size(); i++){
+			cout << "kernel_size[" << i << "]: " <<
+				m_kernel_size[i] << endl;
+		}
+		for (int i = 0; i < m_pad.size(); i++){
 			cout << "pad[" << i << "]: " << m_pad[i] << endl;
-		for (int i = 0; i < m_stride.size(); i++)
-			cout << "stride[" << i << "]: " << m_stride[i] << 
-			endl;
+		}
+		for (int i = 0; i < m_stride.size(); i++){
+			cout << "stride[" << i << "]: " << m_stride[i] <<
+				endl;
+		}
 		cout << "pad_h: " << m_pad_h << endl;
 		cout << "pad_w: " << m_pad_w << endl;
 		cout << "kernel_h: " << m_kernel_h << endl;
@@ -158,10 +161,7 @@ namespace jaffe {
 		m_bias_filler->Show();
 		cout << "engine: " << m_engine << endl;
 		cout << "axis: " << m_axis << endl;
-		cout << "force_nd_im2col: " << m_force_nd_im2col << 
-			endl;
-		for (int i = 0; i < m_param_spec.size(); i++)
-			m_param_spec.at(i).Show();
+		cout << "force_nd_im2col: " << m_force_nd_im2col <<  endl;
 
 		return true;
 	}

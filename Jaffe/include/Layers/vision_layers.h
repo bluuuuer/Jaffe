@@ -29,17 +29,16 @@ namespace jaffe {
 
 		bool Init(const vector<string> param);
 
-		virtual bool Show();
-
-		virtual Dtype Forward(/*const vector<Blob<Dtype>*>& bottom, 
-							 const vector<Blob<Dtype>*>& top*/);
+		bool Show();
 
 	private:
+
 		JConvolutionParam* m_param;
+
 	};
 
 	template <typename Dtype>
-	class JPoolingLayer : public Layer<Dtype> {
+	class JPoolingLayer : public JLayer<Dtype> {
 	public:
 		JPoolingLayer(){
 			m_param = new JPoolingParam;
@@ -51,12 +50,11 @@ namespace jaffe {
 
 		bool Init(const vector<string> param);
 
-		virtual Dtype Forward(/*const vector<Blob<Dtype>*>& bottom,
-							  const vector<Blob<Dtype>*>& top*/);
-
 		bool SetParam(const vector<string> param);
 
 		bool ReadParam();
+
+		bool Show();
 
 	private:
 		JPoolingParam* m_param;

@@ -25,16 +25,23 @@ namespace jaffe {
 	template <typename Dtype>
 	class JDataLayer : public  JBasePrefetchingDataLayer<Dtype>{
 	public:
+
 		JDataLayer(){
 			m_param = new JDataParam;
 		};
+
 		~JDataLayer(){
 			delete[] m_param;
 		};
+
 		bool Init(vector<string> param);
-		virtual void Forward();
+
+		bool Show();
+
 	private:
+
 		JDataParam* m_param;
+
 	};
 
 }

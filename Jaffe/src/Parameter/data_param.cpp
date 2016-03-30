@@ -75,6 +75,21 @@ namespace jaffe {
 	}
 
 	bool JDataParam::Show(){
+		cout << endl;
+		cout << "Data Layer (" << m_name << "):" << endl;
+		ShowSharedParam();
+		cout << "source: " << m_source << endl;
+		cout << "batch_size: " << m_batch_size << endl;
+		cout << "rank_skip: " << m_rank_skip << endl;
+		cout << "backend: " << m_backend << endl;
+		cout << "scale: " << m_scale << endl;
+		cout << "mean_file: " << m_mean_file << endl;
+		cout << "crop_size: " << m_crop_size << endl;
+		cout << "mirror: " << m_mirror << endl;
+		cout << "force_encode_color: " << m_force_encoded_color
+			<< endl;
+		cout << "prefetch: " << m_prefetch << endl;
+
 		return true;
 	}
 }

@@ -3,11 +3,14 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 
 #include "jmatch.h"
 
 using std::vector;
 using std::string;
+using std::cout;
+using std::endl;
 
 namespace jaffe{
 
@@ -25,6 +28,7 @@ namespace jaffe{
 			vector<float>(m_mean_value).swap(m_mean_value);
 		};
 		bool SetParam(const vector<string> param);
+		bool Show();
 	private:
 		float m_scale;
 		bool m_mirror;

@@ -84,4 +84,24 @@ namespace jaffe{
 		cout << "Done" << endl;
 		return true;
 	}
+
+	bool JPoolingParam::Show(){
+		cout << endl;
+		cout << "Pooling Layer (" << m_name << "):" << endl;
+		ShowSharedParam();
+		cout << "pool: " << m_pool << endl;
+		cout << "pad: " << m_pad << endl;
+		cout << "pad_h: " << m_pad_h << endl;
+		cout << "pad_w: " << m_pad_w << endl;
+		cout << "kernel_size: " << m_kernel_size << endl;
+		cout << "kernel_h: " << m_kernel_h << endl;
+		cout << "kernel_w: " << m_kernel_w << endl; 
+		cout << "stride: " << m_stride << endl;
+		cout << "stride_h: " << m_stride_h << endl;
+		cout << "stride_w: " << m_stride_w << endl;
+		cout << "engine: " << m_engine << endl;
+		cout << "global_pooling: " << m_global_pooling << endl;
+
+		return true;
+	}
 } // namespace jaffe

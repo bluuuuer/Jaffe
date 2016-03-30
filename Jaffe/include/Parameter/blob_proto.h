@@ -3,11 +3,14 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 
 #include "jmatch.h"
 
 using std::vector;
 using std::string;
+using std::cout;
+using std::endl;
 
 namespace jaffe {
 	
@@ -27,6 +30,7 @@ namespace jaffe {
 		};
 
 		bool SetParam(const vector<string> param);
+		bool Show();
 
 	private:
 		//JBlobShape m_shape;

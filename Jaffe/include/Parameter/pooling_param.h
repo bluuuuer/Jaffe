@@ -23,6 +23,7 @@ namespace jaffe{
 		};
 		~JPoolingParam(){};
 		bool SetParam(const vector<string> param);
+		bool Show();
 	private:
 		enum PoolMethod{
 			MAX = 0,

@@ -19,22 +19,19 @@ namespace jaffe {
 	template <typename Dtype>
 	class JLayer{
 	public:
+
 		JLayer(){
 		};
+
 		~JLayer(){
-			if (m_parameter->GetTopNum()){
-				m_top.clear();
-				vector<JLayer*>(m_top).swap(m_top);
-			}
-			if (m_parameter->GetBottomNum()){
-				m_bottom.clear();
-				vector<JLayer*>(m_bottom).swap(m_bottom);
-			}
+			vector<JLayer*>(m_top).swap(m_top);
+			vector<JLayer*>(m_bottom).swap(m_bottom);
+
+			delete[] m_param;
 		};
-		virtual bool SetSharedParam(const vector<string> param);
-		virtual Dtype Forward(){};
-		string GetType(){ return m_parameter->GetType(); };
-		virtual bool Show(){ return m_parameter->Show(); };
+
+		bool SetSharedParam(const vector<string> param);
+		string GetType(){ return m_param->GetType(); };
 
 	protected:
 		string* m_top_s;
@@ -44,7 +41,7 @@ namespace jaffe {
 		vector<JLayer*> m_bottom;
 
 	private:
-		JLayerParam* m_parameter;
+		JLayerParam* m_param;
 	};
 }
 #endif

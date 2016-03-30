@@ -11,6 +11,7 @@
 
 #include "jmatch.h"
 #include "blob_shape.h"
+#include "net_state.h"
 
 using std::string; 
 using std::cout;
@@ -32,6 +33,8 @@ namespace jaffe {
 			vector<JBlobShape>(m_input_shape).swap(m_input_shape);
 			vector<int>(m_input_dim).swap(m_input_dim);
 			vector<vector<string>>(m_layers_param).swap(m_layers_param);
+
+			delete[] m_state;
 		};
 		// 设置参数文件路径
 		bool SetFilePath(const string filepath){
@@ -54,9 +57,9 @@ namespace jaffe {
 		vector<JBlobShape> m_input_shape;
 		vector<int> m_input_dim;
 		bool m_force_backward;
-		//NetState* state;
+		JNetState* m_state;
 		bool m_debug_info;
-		//vector<JLayerParam> m_layer;
+		//vector<JLayerParam> m_layer;	//	放弃这种LayerParameter的储存方式
 
 		int m_layer_num; // 该 net 中 layer 的数量
 		vector<vector<string>> m_layers_param;  // 所有的 layer 参数

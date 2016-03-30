@@ -26,4 +26,13 @@ namespace jaffe{
 
 		return true;
 	}
+
+	bool JLossParam::Show(){
+		cout << "loss_parameter: " << endl;
+		cout << "\tignore_label: " << m_ignore_label << endl;
+		cout << "\tnormalization: " << m_normalization << endl;
+		cout << "\tnormalize: " << m_normalize << endl;
+		return true;
+	}
+
 } // namespace jaffe

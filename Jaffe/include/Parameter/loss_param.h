@@ -3,11 +3,14 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 
 #include "jmatch.h"
 
 using std::vector; 
 using std::string;
+using std::cout;
+using std::endl;
 
 namespace jaffe{
 
@@ -20,6 +23,7 @@ namespace jaffe{
 		};
 		~JLossParam(){};
 		bool SetParam(const vector<string> param);
+		bool Show();
 
 	private:
 		int m_ignore_label;

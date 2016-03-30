@@ -24,4 +24,20 @@ namespace jaffe {
 		return true;
 	}
 
+	bool JTransformationParam::Show(){
+		cout << "transformation_parameter: " << endl;
+		cout << "\tscale: " << m_scale << endl;
+		cout << "\tmirror: " << m_mirror << endl;
+		cout << "\tcrop_size: " << m_crop_size << endl;
+		cout << "\tmean_file: " << m_mean_file << endl;
+		for (int i = 0; i < m_mean_value.size(); i++){
+			cout << "\tmean_value[" << i << "]: " <<
+				m_mean_value.at(i) << endl;
+		}
+		cout << "\tforce_color: " << m_force_color << endl;
+		cout << "\tforce_gray: " << m_force_gray << endl;
+
+		return true;
+	}
+
 } // namespace jaffe

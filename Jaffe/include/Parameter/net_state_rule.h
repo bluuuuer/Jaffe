@@ -3,11 +3,14 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 
 #include "jmatch.h"
 
 using std::vector;
 using std::string;
+using std::cout;
+using std::endl;
 
 namespace jaffe{
 
@@ -21,7 +24,10 @@ namespace jaffe{
 			vector<string>(m_stage).swap(m_stage);
 			vector<string>(m_not_stage).swap(m_not_stage);
 		};
+
 		bool SetParam(const vector<string> param);
+
+		bool Show();
 	private:
 		//Phase m_phase;
 		int m_min_level;
