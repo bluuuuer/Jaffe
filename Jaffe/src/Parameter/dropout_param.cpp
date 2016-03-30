@@ -1,19 +1,19 @@
-#include "relu_param.h"
+#include "dropout_param.h"
 
-namespace jaffe{
+namespace jaffe {
 
-	bool RPisleft(char c){
+	bool DRPisleft(char c){
 		return c == '{';
 	}
 
-	bool RPisright(char c){
+	bool DRPisright(char c){
 		return c == '}';
 	}
 
-	bool JReluParam::SetParam(const vector<string> param){
+	bool JDropoutParam::SetParam(const vector<string> param){
 		SetSharedParam(param);
-
-		cout << "Initting ReLU Layer \"" << m_name
+		
+		cout << "Initting Dropout Layer \"" << m_name
 			<< "\"..." << endl;
 
 		string line = "";
@@ -23,17 +23,17 @@ namespace jaffe{
 
 		for (int i = 0; i < param.size(); i++){
 			line = param.at(i);
-			if (line.find("convolution_param") != string::npos){
+			if (line.find(" dropout_param") != string::npos){
 				b_enter = true;
 				i_left += count_if(line.begin(), line.end(),
-					RPisleft);
+					DRPisleft);
 			}
 			else if (b_enter){
 				v_unique_param.push_back(line);
 				i_left += count_if(line.begin(), line.end(),
-					RPisleft);
+					DRPisleft);
 				i_left -= count_if(line.begin(), line.end(),
-					RPisright);
+					DRPisright);
 				if (i_left == 0){
 					v_unique_param.pop_back();
 					SetUniqueParam(v_unique_param);
@@ -42,28 +42,18 @@ namespace jaffe{
 				}
 			}
 		}
-
 		return true;
 	}
 
-	bool JReluParam::SetUniqueParam(const vector<string> param){
+	bool JDropoutParam::SetUniqueParam(const vector<string> param){
 		string line = "";
-		
+
 		for (int i = 0; i < param.size(); i++){
 			line = param.at(i);
 
-			matchFloat(line, "negative_slope:", &m_negative_slope);
-
-			if (line.find("engine:") != string::npos){
-				if (line.find("CAFFE") != string::npos){
-					m_engine = CAFFE;
-				}
-				else if (line.find("CUDNN") != string::npos){
-					m_engine = CUDNN;
-				}
-			}
+			matchFloat(line, "dropout_ratio:", &m_dropout_ratio);
 		}
-		
+
 		cout << "Done" << endl;
 		return true;
 	}

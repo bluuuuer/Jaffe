@@ -1,19 +1,19 @@
-#include "relu_param.h"
+#include "softmax_param.h"
 
-namespace jaffe{
+namespace jaffe {
 
-	bool RPisleft(char c){
+	bool SPisleft(char c){
 		return c == '{';
 	}
 
-	bool RPisright(char c){
+	bool SPisright(char c){
 		return c == '}';
 	}
 
-	bool JReluParam::SetParam(const vector<string> param){
+	bool JSoftmaxParam::SetParam(const vector<string> param){
 		SetSharedParam(param);
 
-		cout << "Initting ReLU Layer \"" << m_name
+		cout << "Initting Softmax Layer \"" << m_name
 			<< "\"..." << endl;
 
 		string line = "";
@@ -23,17 +23,17 @@ namespace jaffe{
 
 		for (int i = 0; i < param.size(); i++){
 			line = param.at(i);
-			if (line.find("convolution_param") != string::npos){
+			if (line.find(" softmax_param") != string::npos){
 				b_enter = true;
 				i_left += count_if(line.begin(), line.end(),
-					RPisleft);
+					SPisleft);
 			}
 			else if (b_enter){
 				v_unique_param.push_back(line);
 				i_left += count_if(line.begin(), line.end(),
-					RPisleft);
+					SPisleft);
 				i_left -= count_if(line.begin(), line.end(),
-					RPisright);
+					SPisright);
 				if (i_left == 0){
 					v_unique_param.pop_back();
 					SetUniqueParam(v_unique_param);
@@ -42,19 +42,16 @@ namespace jaffe{
 				}
 			}
 		}
-
 		return true;
 	}
 
-	bool JReluParam::SetUniqueParam(const vector<string> param){
+	bool JSoftmaxParam::SetUniqueParam(const vector<string> param){
 		string line = "";
-		
+
 		for (int i = 0; i < param.size(); i++){
 			line = param.at(i);
 
-			matchFloat(line, "negative_slope:", &m_negative_slope);
-
-			if (line.find("engine:") != string::npos){
+			if (line.find("engine") != string::npos){
 				if (line.find("CAFFE") != string::npos){
 					m_engine = CAFFE;
 				}
@@ -62,8 +59,10 @@ namespace jaffe{
 					m_engine = CUDNN;
 				}
 			}
+
+			matchInt(line, "axis:", &m_axis);
 		}
-		
+
 		cout << "Done" << endl;
 		return true;
 	}

@@ -19,7 +19,7 @@ namespace jaffe {
 			m_prefetch = 0;
 		};
 		~JDataParam(){};
-		bool SetParam(vector<string> param);
+		bool SetParam(const vector<string> param);
 		bool Show();
 	private:
 		enum DB{
@@ -36,6 +36,8 @@ namespace jaffe {
 		bool m_mirror;
 		bool m_force_encoded_color;
 		int m_prefetch;
+
+		bool SetUniqueParam(const vector<string> param);
 	};
 }
 #endif

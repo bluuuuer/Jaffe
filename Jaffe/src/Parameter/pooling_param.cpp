@@ -2,12 +2,51 @@
 
 namespace jaffe{
 
+	bool PPisleft(char c){
+		return c == '{';
+	}
+
+	bool PPisright(char c){
+		return c == '}';
+	}
+
 	bool JPoolingParam::SetParam(const vector<string> param){
 		SetSharedParam(param);
 
-		cout << "Initting pooling layer \"" << m_name
+		cout << "Initting Pooling Layer \"" << m_name
 			<< "\"..." << endl;
 
+		string line = "";
+		vector<string> v_unique_param;
+		bool b_enter = false;
+		int i_left = 0;
+
+		for (int i = 0; i < param.size(); i++){
+			line = param.at(i);
+			if (line.find(" pooling_param") != string::npos){
+				b_enter = true;
+				i_left += count_if(line.begin(), line.end(),
+					PPisleft);
+			}
+			else if (b_enter){
+				v_unique_param.push_back(line);
+				i_left += count_if(line.begin(), line.end(),
+					PPisleft);
+				i_left -= count_if(line.begin(), line.end(),
+					PPisright);
+				if (i_left == 0){
+					v_unique_param.pop_back();
+					SetUniqueParam(v_unique_param);
+					v_unique_param.clear();
+					b_enter = false;
+				}
+			}
+		}
+
+		return true;
+	}
+
+	bool JPoolingParam::SetUniqueParam(const vector<string> param){
 		string line;
 		int left = 0;
 		vector<string> temp_s_v;

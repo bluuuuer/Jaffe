@@ -46,6 +46,8 @@ namespace jaffe{
 		};
 		Engine m_engine;
 		bool m_global_pooling;
+
+		bool SetUniqueParam(const vector<string> param);
 	};
 } // namespace jaffe
 #endif

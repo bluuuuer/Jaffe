@@ -3,7 +3,6 @@
 
 #include "layer_param.h"
 #include "filler_param.h"
-#include "param_spec.h"
 
 namespace jaffe {
 
@@ -54,6 +53,8 @@ namespace jaffe {
 		Engine m_engine;
 		int m_axis;
 		bool m_force_nd_im2col;
+
+		bool SetUniqueParam(const vector<string> param);
 	};
 }
 #endif

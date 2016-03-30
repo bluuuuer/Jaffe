@@ -25,6 +25,8 @@ namespace jaffe{
 		};
 		NormalizationMode m_normalization;
 		bool m_normalize;
+		
+		bool SetUniqueParam(const vector<string> param);
 	};
 } // namespace jaffe
 

@@ -1,27 +1,28 @@
-#ifndef RELU_PARAM_H_H
-#define RELU_PARAM_H_H
+#ifndef SOFTMAX_PARAM_H_H
+#define SOFTMAX_PARAM_H_H
 
 #include "layer_param.h"
 
-namespace jaffe{
-
-	class JReluParam : public JLayerParam{
+namespace jaffe {
+	
+	class JSoftmaxParam : public JLayerParam{
 	public:
-		JReluParam(){
-			m_negative_slope = 0.0;
+		JSoftmaxParam(){
 			m_engine = DEFAULT;
+			m_axis = 1;
 		};
-		~JReluParam(){};
+		~JSoftmaxParam(){};
 		bool SetParam(const vector<string> param);
+
 	private:
-		float m_negative_slope;
 		enum Engine{
 			DEFAULT = 0,
 			CAFFE = 1,
 			CUDNN = 2
 		};
 		Engine m_engine;
-
+		int m_axis;
+		
 		bool SetUniqueParam(const vector<string> param);
 	};
 } // namespace jaffe

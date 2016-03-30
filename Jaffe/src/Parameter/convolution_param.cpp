@@ -1,31 +1,63 @@
 #include "convolution_param.h"
 
 namespace jaffe {
-	bool CLPisleft(char c){
+
+	bool CPisleft(char c){
 		return c == '{';
 	}
 
-	bool CLPisright(char c){
+	bool CPisright(char c){
 		return c == '}';
 	}
 
 	bool JConvolutionParam::SetParam(const vector<string> param){
 		SetSharedParam(param);
 
-		cout << "Initting convolution layer \"" << m_name 
-			<< "\"..."<< endl;
+		cout << "Initting Convolution Layer \"" << m_name
+			<< "\"..." << endl;
 
 		string line = "";
-		bool enter_weight_f = false;
-		bool enter_bias_f = false;
-		int left = 0;
-		vector<string> temp_s_v;
+		vector<string> v_unique_param;
+		bool b_enter = false;
+		int i_left = 0;
+
+		for (int i = 0; i < param.size(); i++){
+			line = param.at(i);
+			if (line.find(" convolution_param") != string::npos){
+				b_enter = true;
+				i_left += count_if(line.begin(), line.end(),
+					CPisleft);
+			}
+			else if (b_enter){
+				v_unique_param.push_back(line);
+				i_left += count_if(line.begin(), line.end(),
+					CPisleft);
+				i_left -= count_if(line.begin(), line.end(),
+					CPisright);
+				if (i_left == 0){
+					v_unique_param.pop_back();
+					SetUniqueParam(v_unique_param);
+					v_unique_param.clear();
+					b_enter = false;
+				}
+			}
+		}
+
+		return true;
+	}
+
+	bool JConvolutionParam::SetUniqueParam(const vector<string> param){
+		string line = "";
+		bool b_enter_weight = false;
+		bool b_enter_bias = false;
+		int i_left = 0;
+		vector<string> v_temp;
 		int i_temp = 0;
 
 		for (int i = 0; i < param.size(); i++){
 			line = param.at(i);
 			// 没有进入更深的参数
-			if (!enter_weight_f && !enter_bias_f){
+			if (!b_enter_weight && !b_enter_bias){
 
 				matchInt(line, "num_output:", &m_num_output);
 				matchBool(line, "bias_term:", &m_bias_term);
@@ -56,48 +88,47 @@ namespace jaffe {
 				}
 			}
 			// 进入 weight_filler 参数空间
-			if (line.find("weight_filler") != string::npos
-				&& !enter_weight_f){
-				enter_weight_f = true;
+			if (line.find("weight_filler") != string::npos){
+				b_enter_weight = false;
 				m_weight_filler = new JFillerParam;
-				left += count_if(line.begin(), line.end(), 
-					CLPisleft);
+				i_left += count_if(line.begin(), line.end(),
+					CPisleft);
 			}
-			else if (enter_weight_f){
-				temp_s_v.push_back(line);
-				left += count_if(line.begin(), line.end(), 
-					CLPisleft);
-				left -= count_if(line.begin(), line.end(), 
-					CLPisright);
-				if (left == 0){
-					temp_s_v.pop_back();
-					m_weight_filler->SetParameter(temp_s_v);
-					temp_s_v.clear();
-					enter_weight_f = false;
+			else if (b_enter_weight){
+				v_temp.push_back(line);
+				i_left += count_if(line.begin(), line.end(),
+					CPisleft);
+				i_left -= count_if(line.begin(), line.end(),
+					CPisright);
+				if (i_left == 0){
+					v_temp.pop_back();
+					m_weight_filler->SetParameter(v_temp);
+					v_temp.clear();
+					b_enter_weight = false;
 				}
 			}
 			// 进入 bias_filler 参数空间
-			if (line.find("bias_filler") != string::npos
-				&& !enter_bias_f){
-				enter_bias_f = true;
+			if (line.find("bias_filler") != string::npos){
+				b_enter_bias = true;
 				m_bias_filler = new JFillerParam;
-				left += count_if(line.begin(), line.end(), 
-					CLPisleft);
+				i_left += count_if(line.begin(), line.end(),
+					CPisleft);
 			}
-			else if (enter_bias_f){
-				temp_s_v.push_back(line);
-				left += count_if(line.begin(), line.end(), 
-					CLPisleft);
-				left -= count_if(line.begin(), line.end(), 
-					CLPisright);
-				if (left == 0){
-					temp_s_v.pop_back();
-					m_bias_filler->SetParameter(temp_s_v);
-					temp_s_v.clear();
-					enter_bias_f = false;
+			else if (b_enter_bias){
+				v_temp.push_back(line);
+				i_left += count_if(line.begin(), line.end(),
+					CPisleft);
+				i_left -= count_if(line.begin(), line.end(),
+					CPisright);
+				if (i_left == 0){
+					v_temp.pop_back();
+					m_bias_filler->SetParameter(v_temp);
+					v_temp.clear();
+					b_enter_bias = false;
 				}
 			}
 		}
+
 		cout << "Done" << endl;
 		return true;
 	}

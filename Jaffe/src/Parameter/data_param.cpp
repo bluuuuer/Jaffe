@@ -2,13 +2,53 @@
 
 namespace jaffe {
 
-	bool JDataParam::SetParam(vector<string> param){
+	bool DPisleft(char c){
+		return c == '{';
+	}
+
+	bool DPisright(char c){
+		return c == '}';
+	}
+
+	bool JDataParam::SetParam(const vector<string> param){
 		SetSharedParam(param);
 
-		cout << "Initting convolution layer \"" << m_name << "\"..."
+		cout << "Initting Data Layer \"" << m_name << "\"..."
 			<< endl;
 
-		string line;
+		string line = "";
+		vector<string> v_unique_param;
+		bool b_enter = false;
+		int i_left = 0;
+
+		for (int i = 0; i < param.size(); i++){
+			line = param.at(i);
+			if (line.find(" data_param") != string::npos){
+				b_enter = true;
+				i_left += count_if(line.begin(), line.end(),
+					DPisleft);
+			}
+			else if (b_enter){
+				v_unique_param.push_back(line);
+				i_left += count_if(line.begin(), line.end(),
+					DPisleft);
+				i_left -= count_if(line.begin(), line.end(),
+					DPisright);
+				if (i_left == 0){
+					v_unique_param.pop_back();
+					SetUniqueParam(v_unique_param);
+					v_unique_param.clear();
+					b_enter = false;
+				}
+			}
+		}
+
+		return true;
+	}
+
+	bool JDataParam::SetUniqueParam(const vector<string> param){
+		string line = "";
+
 		for (int i = 0; i < param.size(); i++){
 			line = param.at(i);
 			// 没有进入更深的参数
