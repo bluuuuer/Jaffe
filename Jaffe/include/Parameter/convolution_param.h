@@ -1,5 +1,5 @@
-#ifndef CONVOLUTION_LAYER_PARAM_H_H
-#define CONVOLUTION_LAYER_PARAM_H_H
+#ifndef CONVOLUTION_PARAM_H_H
+#define CONVOLUTION_PARAM_H_H
 
 #include "layer_param.h"
 #include "filler_param.h"
@@ -7,9 +7,9 @@
 
 namespace jaffe {
 
-	class JConvolutionLayerParam : public JLayerParam{
+	class JConvolutionParam : public JLayerParam{
 	public:
-		JConvolutionLayerParam(){
+		JConvolutionParam(){
 			m_num_output = 0;
 			m_bias_term = true;
 			m_pad_h = 0;
@@ -23,11 +23,11 @@ namespace jaffe {
 			m_axis = 1;
 			m_force_nd_im2col = false;
 		};
-		~JConvolutionLayerParam(){
+		~JConvolutionParam(){
 			delete[] m_weight_filler;
 			delete[] m_bias_filler;
 		};
-		bool SetParam(vector<string> param);
+		bool SetParam(const vector<string> param);
 		bool Show();
 
 	private:

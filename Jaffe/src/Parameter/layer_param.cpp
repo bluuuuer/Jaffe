@@ -16,24 +16,39 @@ namespace jaffe {
 		bool enter_param_spec = false;
 		vector<string> temp_s_v;
 		int left = 0;
+		string str_temp = "";
+		float f_temp = 0.0;
+		bool b_temp = false;
 		for (int i = 0; i < param.size(); i++){
 			line = param.at(i);
 			if (!enter_param_spec){
-				if (matchString(line, "type:", &m_type))
+				if (matchString(line, "type:", &m_type)){
 					m_type = true;
+				} // 防止更深层次内出现同名参数
 
-				if (matchString(line, "name:", &m_name))
+				if (matchString(line, "name:", &m_name)){
 					m_name = true;
+				}
 
-				if (line.find("top") != string::npos)
-					m_top_num++;
-				if (line.find("bottom") != string::npos)
-					m_bottom_num++;
+				if(matchString(line, "bottom:", &str_temp)){
+					m_bottom.push_back(str_temp);
+				}
+
+				if (matchString(line, "bottom:", &str_temp)){
+					m_bottom.push_back(str_temp);
+				}
+
+				if (matchFloat(line, "loss_weight:", &f_temp)){
+					m_loss_weight.push_back(f_temp);
+				}
+
+				if (matchBool(line, "propagate_down:", &b_temp)){
+					m_propagate_down.push_back(b_temp);
+				}
 			}
 			// 进入 param_spec 参数空间
-			if (line.find("param") != string::npos &&
-				line.find("convolution_param") == string::npos
-				&& !enter_param_spec){
+			if (line.find(" param {") != string::npos && 
+				!enter_param_spec){
 				enter_param_spec = true;
 				left += count_if(line.begin(), line.end(), LPisleft);
 			}

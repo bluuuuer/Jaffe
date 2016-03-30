@@ -12,6 +12,15 @@ namespace jaffe {
 			matchFloat(line, "mean", &m_mean);
 			matchFloat(line, "std:", &m_std);
 			matchInt(line, "sparse:", &m_sparse);
+			
+			if (line.find("variance_norm:") != string::npos){
+				if (line.find("FAN_OUT") != string::npos){
+					m_variance_norm = FAN_OUT;
+				}
+				else if (line.find("AVERAGE") != string::npos){
+					m_variance_norm = AVERAGE;
+				}
+			}
 		}
 		return true;
 	}

@@ -2,7 +2,7 @@
 #define DATA_LAYERS_H_H
 
 #include "layer.h"
-#include "data_layer_param.h"
+#include "data_param.h"
 
 namespace jaffe {
 	class JBaseDataLayer : public JLayer{
@@ -23,13 +23,13 @@ namespace jaffe {
 	class JDataLayer : public  JBasePrefetchingDataLayer{
 	public:
 		JDataLayer(){
-			m_parameter = new JDataLayerParam;
+			m_parameter = new JDataParam;
 		};
 		~JDataLayer(){};
 		bool SetParam(vector<string> param);
 		virtual void Forward();
 	private:
-		JDataLayerParam* m_parameter;
+		JDataParam* m_parameter;
 	};
 
 }

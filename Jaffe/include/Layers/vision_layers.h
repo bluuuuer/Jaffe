@@ -2,7 +2,7 @@
 #define VISION_LAYERS_H_H
 
 #include "layer.h"
-#include "convolution_layer_param.h"
+#include "convolution_param.h"
 
 namespace jaffe {
 
@@ -15,7 +15,7 @@ namespace jaffe {
 	class JConvolutionLayer : public JBaseConvolutionLayer{
 	public:
 		JConvolutionLayer(){
-			m_parameter = new JConvolutionLayerParam;
+			m_parameter = new JConvolutionParam;
 		};
 		~JConvolutionLayer(){
 			delete[] m_parameter;
@@ -25,7 +25,7 @@ namespace jaffe {
 		// 输出显示所有参数，测试用
 		virtual bool Show(){ return m_parameter->Show(); };
 	private:
-		JConvolutionLayerParam* m_parameter;
+		JConvolutionParam* m_parameter;
 	};
 }
 #endif

@@ -1,12 +1,12 @@
-#ifndef DATA_LAYER_PARAM_H_H
-#define DATA_LAYER_PARAM_H_H
+#ifndef DATA_PARAM_H_H
+#define DATA_PARAM_H_H
 
 #include "layer_param.h"
 
 namespace jaffe {
-	class JDataLayerParam : public JLayerParam{
+	class JDataParam : public JLayerParam{
 	public:
-		JDataLayerParam(){
+		JDataParam(){
 			m_source = "";
 			m_batch_size = 0;
 			m_rank_skip = 0;
@@ -18,7 +18,7 @@ namespace jaffe {
 			m_force_encoded_color = false;
 			m_prefetch = 0;
 		};
-		~JDataLayerParam(){};
+		~JDataParam(){};
 		bool SetParam(vector<string> param);
 		bool Show();
 	private:

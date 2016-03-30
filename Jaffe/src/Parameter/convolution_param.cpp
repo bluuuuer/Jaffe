@@ -1,4 +1,4 @@
-#include "convolution_layer_param.h"
+#include "convolution_param.h"
 
 namespace jaffe {
 	bool CLPisleft(char c){
@@ -9,34 +9,36 @@ namespace jaffe {
 		return c == '}';
 	}
 
-	bool JConvolutionLayerParam::SetParam(vector<string> param){
+	bool JConvolutionParam::SetParam(const vector<string> param){
 		SetSharedParam(param);
 
 		cout << "Initting convolution layer \"" << m_name 
 			<< "\"..."<< endl;
 
-		string line;
+		string line = "";
 		bool enter_weight_f = false;
 		bool enter_bias_f = false;
 		int left = 0;
 		vector<string> temp_s_v;
+		int i_temp = 0;
+
 		for (int i = 0; i < param.size(); i++){
 			line = param.at(i);
 			// 没有进入更深的参数
 			if (!enter_weight_f && !enter_bias_f){
-				int temp = 0;
 
 				matchInt(line, "num_output:", &m_num_output);
 				matchBool(line, "bias_term:", &m_bias_term);
 
-				if (matchInt(line, "pad:", &temp))
-					m_pad.push_back(temp);
+				if (matchInt(line, "pad:", &i_temp))
+					m_pad.push_back(i_temp);
 
-				if (matchInt(line, "kernel_size:", &temp))
-					m_kernel_size.push_back(temp);
+				if (matchInt(line, "kernel_size:", &i_temp))
+					m_kernel_size.push_back(i_temp);
 
-				if (matchInt(line, "stride:", &temp))
-					m_stride.push_back(temp);
+				if (matchInt(line, "stride:", &i_temp))
+					m_stride.push_back(i_temp);
+
 				matchInt(line, "pad_h:", &m_pad_h);
 				matchInt(line, "pad_w:", &m_pad_w);
 				matchInt(line, "kernel_h", &m_kernel_h);
@@ -44,6 +46,14 @@ namespace jaffe {
 				matchInt(line, "stride_h", &m_stride_h);
 				matchInt(line, "stride_w", &m_stride_w);
 				matchInt(line, "group:", &m_group);
+				if (line.find("engine:") != string::npos){
+					if (line.find("CAFFE") != string::npos){
+						m_engine = CAFFE;
+					}
+					else if (line.find("CUDNN") != string::npos){
+						m_engine = CUDNN;
+					}
+				}
 			}
 			// 进入 weight_filler 参数空间
 			if (line.find("weight_filler") != string::npos
@@ -92,7 +102,7 @@ namespace jaffe {
 		return true;
 	}
 
-	bool JConvolutionLayerParam::Show(){
+	bool JConvolutionParam::Show(){
 		cout << endl;
 		cout << "name: " << m_name << endl;
 		cout << "type: " << m_type << endl;

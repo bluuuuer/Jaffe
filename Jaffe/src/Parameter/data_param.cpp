@@ -1,8 +1,8 @@
-#include "data_layer_param.h"
+#include "data_param.h"
 
 namespace jaffe {
 
-	bool JDataLayerParam::SetParam(vector<string> param){
+	bool JDataParam::SetParam(vector<string> param){
 		SetSharedParam(param);
 
 		cout << "Initting convolution layer \"" << m_name << "\"..."
@@ -34,7 +34,7 @@ namespace jaffe {
 
 	}
 
-	bool JDataLayerParam::Show(){
+	bool JDataParam::Show(){
 		return true;
 	}
 }
