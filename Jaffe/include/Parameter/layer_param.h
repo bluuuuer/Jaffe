@@ -3,9 +3,7 @@
 
 #include <vector>
 #include <string>
-#include <regex>
 #include <iostream>
-#include <sstream>
 
 #include "jmatch.h"
 #include "param_spec.h"

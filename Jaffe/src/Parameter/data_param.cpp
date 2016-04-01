@@ -54,7 +54,7 @@ namespace jaffe {
 			// 没有进入更深的参数
 			matchString(line, "source:", &m_source);
 			matchInt(line, "batch_size:", &m_batch_size);
-			matchInt(line, "rank_skip:", &m_rank_skip);
+			matchInt(line, "rand_skip:", &m_rand_skip);
 			if (line.find("backend:") != string::npos){
 				if (line.find("LEVELDB") != string::npos)
 					m_backend = LEVELDB;
@@ -80,7 +80,7 @@ namespace jaffe {
 		ShowSharedParam();
 		cout << "source: " << m_source << endl;
 		cout << "batch_size: " << m_batch_size << endl;
-		cout << "rank_skip: " << m_rank_skip << endl;
+		cout << "rand_skip: " << m_rand_skip << endl;
 		cout << "backend: " << m_backend << endl;
 		cout << "scale: " << m_scale << endl;
 		cout << "mean_file: " << m_mean_file << endl;
