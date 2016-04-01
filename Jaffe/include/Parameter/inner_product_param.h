@@ -14,8 +14,8 @@ namespace jaffe{
 			m_axis = 1;
 		};
 		~JInnerProductParam(){
-			delete[] m_weight_filler;
-			delete[] m_bias_filler;
+			delete m_weight_filler;
+			delete m_bias_filler;
 		};
 		bool SetParam(const vector<string> param);
 

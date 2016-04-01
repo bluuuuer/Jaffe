@@ -6,12 +6,12 @@
 template <>
 float jaffe_asum<float>(const int n, const float* x) {
 
-	return 0;  // 未完成
+	return 0;  //
 }
 
 template <>
 double jaffe_asum<double>(const int n, const double* x) {
-	return 0;  // 未完成
+	return 0;  //
 }
 
 template <>

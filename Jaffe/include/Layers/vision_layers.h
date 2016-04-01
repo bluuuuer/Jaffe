@@ -24,12 +24,12 @@ namespace jaffe {
 		};
 
 		~JConvolutionLayer(){
-			delete[] m_param;
+			delete m_param;
 		};
 
 		bool Init(const vector<string> param);
 
-		bool Show();
+		virtual bool Show();
 
 	private:
 
@@ -45,7 +45,7 @@ namespace jaffe {
 		};
 
 		~JPoolingLayer(){
-			delete[] m_param;
+			delete m_param;
 		};
 
 		bool Init(const vector<string> param);
@@ -54,7 +54,7 @@ namespace jaffe {
 
 		bool ReadParam();
 
-		bool Show();
+		virtual bool Show();
 
 	private:
 		JPoolingParam* m_param;

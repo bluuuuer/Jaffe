@@ -13,7 +13,7 @@ namespace jaffe{
 	bool JReluParam::SetParam(const vector<string> param){
 		SetSharedParam(param);
 
-		cout << "Initting ReLU Layer \"" << m_name
+		cout << "Initting ReLU Layer \"" << m_s_name
 			<< "\"..." << endl;
 
 		string line = "";

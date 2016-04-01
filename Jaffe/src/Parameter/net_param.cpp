@@ -71,7 +71,7 @@ namespace jaffe {
 				}
 			}
 			// 进入 LayerParameter 参数空间
-			if (line.find("layer") != string::npos){
+			if (line.find("layer {") != string::npos){
 				b_enter_layer = true;
 				m_layer_num++;
 				left += count_if(line.begin(), line.end(), 

@@ -13,7 +13,7 @@ namespace jaffe{
 	bool JLrnParam::SetParam(const vector<string> param){
 		SetSharedParam(param);
 
-		cout << "Initting LRN Layer \"" << m_name
+		cout << "Initting LRN Layer \"" << m_s_name
 			<< "\"..." << endl;
 
 		string line = "";

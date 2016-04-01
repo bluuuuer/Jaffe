@@ -3,41 +3,48 @@
 // SyncedMemory.hpp的替代，用来存储原始数据
 // 没有实现cpu数据与gpu数据的同步
 
+#ifndef JAFFE_RAWDATA_H_
+#define JAFFE_RAWDATA_H_
+
 #include <cstdlib>
+#include "common.h"
+
 
 // 为指针开辟空间
-inline void MallocHost(void** ptr, size_t size)
+inline void mallocHost(void** ptr, size_t size)
 {
 	*ptr = malloc(size);
 }
 // 回收空间
-inline void FreeHost(void* ptr)
+inline void freeHost(void* ptr)
 {
 	free(ptr);
 }
 
-class RawData {
+class JRawData {
 public:
-	RawData() : data_ptr_(NULL), size_(0), own_data_(false){}
-	RawData(size_t size) : data_ptr_(NULL), size_(size), own_data_(false) {}
-	~RawData();
+	JRawData() : m_data_ptr(NULL), m_size(0), m_own_data(false){}
+	JRawData(size_t size) : m_data_ptr(NULL), m_size(size), m_own_data(false) {}
+	~JRawData();
 
 	// 返回RawData中数据的大小
-	size_t size() { return size_; }
+	size_t GetSize() { return m_size; }
 	//
-	bool own_data() { return own_data_; }
+	bool GetOwnData() { return m_own_data; }
 	// 获取data的指针
-	const void* data();  
-	void* mutable_data();
+	const void* GetData();
+	void* GetMutableData();
 
-	void setdata(void* data);
-	
+	void SetData(void* data);
 
-	
+
+
 private:
-	void new_data();
+	void NewData();  // to_cpu() / to_gpu ()
 
-	void* data_ptr_;
-	size_t size_;
-	bool own_data_;
+	void* m_data_ptr;
+	size_t m_size;
+	bool m_own_data;
 };
+
+#endif

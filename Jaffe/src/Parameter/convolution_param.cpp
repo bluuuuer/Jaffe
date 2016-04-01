@@ -13,7 +13,7 @@ namespace jaffe {
 	bool JConvolutionParam::SetParam(const vector<string> param){
 		SetSharedParam(param);
 
-		cout << "Initting Convolution Layer \"" << m_name
+		cout << "Initting Convolution Layer \"" << m_s_name
 			<< "\"..." << endl;
 
 		string line = "";
@@ -135,33 +135,45 @@ namespace jaffe {
 
 	bool JConvolutionParam::Show(){
 		cout << endl;
-		cout << "Convolution Layer (" << m_name << "):" << endl;
+		cout << "Convolution Layer (" << m_s_name << "):" << endl;
 		ShowSharedParam();
-		cout << "num_output: " << m_num_output << endl;
-		cout << "m_bias_term: " << m_bias_term << endl;
+		ShowUniqueParam();
+		return true;
+	}
+
+	bool JConvolutionParam::ShowUniqueParam(){
+
+		cout << "conv_param: {" << endl;
+		cout << "\tnum_output: " << m_num_output << endl;
+		cout << "\tm_bias_term: " << m_bias_term << endl;
 		for (int i = 0; i < m_kernel_size.size(); i++){
-			cout << "kernel_size[" << i << "]: " <<
+			cout << "\tkernel_size[" << i << "]: " <<
 				m_kernel_size[i] << endl;
 		}
 		for (int i = 0; i < m_pad.size(); i++){
-			cout << "pad[" << i << "]: " << m_pad[i] << endl;
+			cout << "\tpad[" << i << "]: " << m_pad[i] << endl;
 		}
 		for (int i = 0; i < m_stride.size(); i++){
-			cout << "stride[" << i << "]: " << m_stride[i] <<
+			cout << "\tstride[" << i << "]: " << m_stride[i] <<
 				endl;
 		}
-		cout << "pad_h: " << m_pad_h << endl;
-		cout << "pad_w: " << m_pad_w << endl;
-		cout << "kernel_h: " << m_kernel_h << endl;
-		cout << "kernel_w: " << m_kernel_w << endl;
-		cout << "stride_h: " << m_stride_h << endl;
-		cout << "stride_w: " << m_stride_w << endl;
-		cout << "group: " << m_group << endl;
-		m_weight_filler->Show();
-		m_bias_filler->Show();
-		cout << "engine: " << m_engine << endl;
-		cout << "axis: " << m_axis << endl;
-		cout << "force_nd_im2col: " << m_force_nd_im2col <<  endl;
+		cout << "\tpad_h: " << m_pad_h << endl;
+		cout << "\tpad_w: " << m_pad_w << endl;
+		cout << "\tkernel_h: " << m_kernel_h << endl;
+		cout << "\tkernel_w: " << m_kernel_w << endl;
+		cout << "\tstride_h: " << m_stride_h << endl;
+		cout << "\tstride_w: " << m_stride_w << endl;
+		cout << "\tgroup: " << m_group << endl;
+		if (m_weight_filler){
+			m_weight_filler->Show();
+		}
+		if (m_bias_filler){
+			m_bias_filler->Show();
+		}
+		cout << "\tengine: " << m_engine << endl;
+		cout << "\taxis: " << m_axis << endl;
+		cout << "\tforce_nd_im2col: " << m_force_nd_im2col <<  endl;
+		cout << "}" << endl;
 
 		return true;
 	}

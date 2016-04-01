@@ -22,47 +22,50 @@ namespace jaffe {
 	class JLayerParam{
 	public:
 		JLayerParam(){
-			m_name = "";
-			m_type = "";
-			m_loss_param = new JLossParam;
+			m_s_name = "";
+			m_s_type = "";
 		};
 		~JLayerParam(){
-			vector<string>(m_bottom).swap(m_bottom);
-			vector<string>(m_top).swap(m_top);
-			vector<float>(m_loss_weight).swap(m_loss_weight);
-			vector<JParamSpec>(m_param).swap(m_param);
-			vector<JBlobProto>(m_blobs).swap(m_blobs);
-			vector<bool>(m_propagate_down).swap(m_propagate_down);
-			vector<JNetStateRule>(m_include).swap(m_include);
-			vector<JNetStateRule>(m_exclude).swap(m_exclude);
+			vector<string>(m_s_bottom).swap(m_s_bottom);
+			vector<string>(m_s_top).swap(m_s_top);
+			vector<float>(m_s_loss_weight).swap(m_s_loss_weight);
+			vector<JParamSpec>(m_s_param).swap(m_s_param);
+			vector<JBlobProto>(m_s_blobs).swap(m_s_blobs);
+			vector<bool>(m_s_propagate_down).swap(m_s_propagate_down);
+			vector<JNetStateRule>(m_s_include).swap(m_s_include);
+			vector<JNetStateRule>(m_s_exclude).swap(m_s_exclude);
 
-			delete[] m_transform_param;
-			delete[] m_loss_param;
+			if (m_s_transform_param){
+				delete m_s_transform_param;
+			}
+			if (m_s_loss_param){
+				delete m_s_loss_param;
+			}
 		};
 		// 读取所有层都会有的共享参数， 每个 layer 都必须调用
+		bool SetType(const vector<string> param);
 		bool SetSharedParam(const vector<string> param);
 		bool ShowSharedParam();
 
-		int GetTopNum(){ return m_top.size(); };
-		int GetBottomNum(){ return m_bottom.size(); };
-		string GetType(){ return m_type; };
+		int GetTopNum(){ return m_s_top.size(); };
+		int GetBottomNum(){ return m_s_bottom.size(); };
+		string GetType(){ return m_s_type; };
 
 	protected:
 		// 各种共享参数
-		string m_name;
-		string m_type;
-		vector<string> m_bottom;
-		vector<string> m_top;
+		string m_s_name;
+		string m_s_type;
+		vector<string> m_s_bottom;
+		vector<string> m_s_top;
 		//Phase m_phase;
-		vector<float> m_loss_weight;
-		vector<JParamSpec> m_param;
-		vector<JBlobProto> m_blobs;
-		vector<bool> m_propagate_down;
-		vector<JNetStateRule> m_include;
-		vector<JNetStateRule> m_exclude;
-		JTransformationParam* m_transform_param;
-		JLossParam* m_loss_param;
-	private:
+		vector<float> m_s_loss_weight;
+		vector<JParamSpec> m_s_param;
+		vector<JBlobProto> m_s_blobs;
+		vector<bool> m_s_propagate_down;
+		vector<JNetStateRule> m_s_include;
+		vector<JNetStateRule> m_s_exclude;
+		JTransformationParam* m_s_transform_param;
+		JLossParam* m_s_loss_param;
 	};
 }
 #endif

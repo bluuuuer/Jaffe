@@ -38,7 +38,7 @@ cv::Mat ReadImageToCVMat(const string& filename, const int height = 0, const int
 	}
 	else
 	{
-		cv_img = cv_img_origin; 
+		cv_img = cv_img_origin;
 	}
 	return cv_img;
 }
@@ -49,7 +49,7 @@ void CVMatToDatum(const cv::Mat& cv_img, JDatum* datum)
 	datum->SetChannels(cv_img.channels());
 	datum->SetHeight(cv_img.rows);
 	datum->SetWidth(cv_img.cols);
-	
+
 	int datum_channels = datum->GetChannels();
 	int datum_height = datum->GetHeight();
 	int datum_width = datum->GetWidth();
@@ -78,7 +78,7 @@ static bool matchExt(const string& fn, string en)
 	string ext = p != fn.npos ? fn.substr(p) : fn;
 	transform(ext.begin(), ext.end(), ext.begin(), ::tolower);
 	transform(en.begin(), en.end(), en.begin(), ::tolower);
-	if ((ext == en) || (en == "jpg" && ext == "jpeg") )
+	if ((ext == en) || (en == "jpg" && ext == "jpeg"))
 	{
 		return true;
 	}
@@ -108,7 +108,7 @@ bool ReadImageToDatum(const string& filename, const int label, const int height,
 		CVMatToDatum(cv_img, datum);
 		datum->SetLabel(label);
 		return true;
-	} 
+	}
 	else
 	{
 		return false;

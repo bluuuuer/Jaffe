@@ -15,7 +15,7 @@ void CVMatToDatum(const cv::Mat& cv_img, JDatum* datum);
 
 static bool matchExt(const string& fn, string en);
 
-bool ReadImageToDatum(const string& filename, const int label, const int height, const int width, const bool is_color, 
+bool ReadImageToDatum(const string& filename, const int label, const int height, const int width, const bool is_color,
 	const string& encoding, JDatum* datum);
 
 // hsz encodedƒ¨»œ «ø’¥Æ

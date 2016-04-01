@@ -13,7 +13,7 @@ namespace jaffe {
 	bool JImageDataParam::SetParam(const vector<string> param){
 		SetSharedParam(param);
 
-		cout << "Initting Image Data Layer \"" << m_name << "\"..."
+		cout << "Initting Image Data Layer \"" << m_s_name << "\"..."
 			<< endl;
 
 		string line = "";
@@ -72,7 +72,7 @@ namespace jaffe {
 
 	bool JImageDataParam::Show(){
 		cout << endl;
-		cout << "Image Data Layer(" << m_name << "):" << endl;
+		cout << "Image Data Layer(" << m_s_name << "):" << endl;
 		cout << "\tsource: " << m_source << endl;
 		cout << "\tbatch_size: " << m_batch_size << endl;
 		cout << "\trand_skip: " << m_rand_skip << endl;

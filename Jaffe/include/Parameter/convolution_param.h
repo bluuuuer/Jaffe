@@ -26,8 +26,8 @@ namespace jaffe {
 			vector<int>(m_pad).swap(m_pad);
 			vector<int>(m_kernel_size).swap(m_kernel_size);
 			vector<int>(m_stride).swap(m_stride);
-			delete[] m_weight_filler;
-			delete[] m_bias_filler;
+			delete m_weight_filler;
+			delete m_bias_filler;
 		};
 		bool SetParam(const vector<string> param);
 		bool Show();
@@ -58,6 +58,7 @@ namespace jaffe {
 		bool m_force_nd_im2col;
 
 		bool SetUniqueParam(const vector<string> param);
+		bool ShowUniqueParam();
 	};
 }
 #endif

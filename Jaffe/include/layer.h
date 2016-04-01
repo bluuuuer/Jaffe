@@ -21,23 +21,23 @@ namespace jaffe {
 	public:
 
 		JLayer(){
+			m_param = new JLayerParam;
 		};
 
 		~JLayer(){
 			vector<JLayer*>(m_top).swap(m_top);
 			vector<JLayer*>(m_bottom).swap(m_bottom);
 
-			delete[] m_param;
+			delete m_param;
 		};
 
+		bool SetType(const vector<string> param);
 		bool SetSharedParam(const vector<string> param);
+		virtual bool Show(){ return true; };
 		string GetType(){ return m_param->GetType(); };
 
 	protected:
-		string* m_top_s;
 		vector<JLayer*> m_top;
-
-		string* m_bottom_s;
 		vector<JLayer*> m_bottom;
 
 	private:

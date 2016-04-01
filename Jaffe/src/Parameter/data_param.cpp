@@ -13,7 +13,7 @@ namespace jaffe {
 	bool JDataParam::SetParam(const vector<string> param){
 		SetSharedParam(param);
 
-		cout << "Initting Data Layer \"" << m_name << "\"..."
+		cout << "Initting Data Layer \"" << m_s_name << "\"..."
 			<< endl;
 
 		string line = "";
@@ -76,20 +76,26 @@ namespace jaffe {
 
 	bool JDataParam::Show(){
 		cout << endl;
-		cout << "Data Layer (" << m_name << "):" << endl;
+		cout << "Data Layer (" << m_s_name << "):" << endl;
 		ShowSharedParam();
-		cout << "source: " << m_source << endl;
-		cout << "batch_size: " << m_batch_size << endl;
-		cout << "rand_skip: " << m_rand_skip << endl;
-		cout << "backend: " << m_backend << endl;
-		cout << "scale: " << m_scale << endl;
-		cout << "mean_file: " << m_mean_file << endl;
-		cout << "crop_size: " << m_crop_size << endl;
-		cout << "mirror: " << m_mirror << endl;
-		cout << "force_encode_color: " << m_force_encoded_color
-			<< endl;
-		cout << "prefetch: " << m_prefetch << endl;
+		ShowUniqueParam();
+		return true;
+	}
 
+	bool JDataParam::ShowUniqueParam(){
+		cout << "data_param {" << endl;
+		cout << "\tsource: " << m_source << endl;
+		cout << "\tbatch_size: " << m_batch_size << endl;
+		cout << "\trand_skip: " << m_rand_skip << endl;
+		cout << "\tbackend: " << m_backend << endl;
+		cout << "\tscale: " << m_scale << endl;
+		cout << "\tmean_file: " << m_mean_file << endl;
+		cout << "\tcrop_size: " << m_crop_size << endl;
+		cout << "\tmirror: " << m_mirror << endl;
+		cout << "\tforce_encode_color: " << m_force_encoded_color
+			<< endl;
+		cout << "\tprefetch: " << m_prefetch << endl;
+		cout << "}" << endl;
 		return true;
 	}
 }

@@ -13,7 +13,7 @@ namespace jaffe {
 	bool JSoftmaxParam::SetParam(const vector<string> param){
 		SetSharedParam(param);
 
-		cout << "Initting Softmax Layer \"" << m_name
+		cout << "Initting Softmax Layer \"" << m_s_name
 			<< "\"..." << endl;
 
 		string line = "";

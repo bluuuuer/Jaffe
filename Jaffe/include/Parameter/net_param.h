@@ -24,9 +24,10 @@ namespace jaffe {
 	class JNetParameter{
 	public:
 		JNetParameter(){
-			m_layer_num = 0;
+			m_name = "";
 			m_force_backward = false;
 			m_debug_info = false;
+			m_layer_num = 0;
 		};
 		~JNetParameter(){
 			vector<string>(m_input).swap(m_input);
@@ -34,7 +35,7 @@ namespace jaffe {
 			vector<int>(m_input_dim).swap(m_input_dim);
 			vector<vector<string>>(m_layers_param).swap(m_layers_param);
 
-			delete[] m_state;
+			delete m_state;
 		};
 		// 设置参数文件路径
 		bool SetFilePath(const string filepath){

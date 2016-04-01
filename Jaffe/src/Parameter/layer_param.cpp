@@ -10,6 +10,16 @@ namespace jaffe {
 		return c == '}';
 	}
 
+	bool JLayerParam::SetType(const vector<string> param){
+		string line;
+		for (int i = 0; i < param.size(); i++){
+			line = param.at(i);
+			if(matchString(line, "type: ", &m_s_type)){
+				return true;
+			}
+		}
+		return false;
+	}
 
 	bool JLayerParam::SetSharedParam(const vector<string> param){
 		string line;
@@ -32,23 +42,23 @@ namespace jaffe {
 				b_enter_param || b_enter_transform_param;
 			if (!b_enter_deep){
 
-				matchString(line, "name:", &m_name);
-				matchString(line, "type:", &m_type);
+				matchString(line, "name:", &m_s_name);
+				matchString(line, "type:", &m_s_type);
 
 				if (matchString(line, "bottom:", &str_temp)){
-					m_bottom.push_back(str_temp);
+					m_s_bottom.push_back(str_temp);
 				}
 
 				if (matchString(line, "top:", &str_temp)){
-					m_top.push_back(str_temp);
+					m_s_top.push_back(str_temp);
 				}
 
 				if (matchFloat(line, "loss_weight:", &f_temp)){
-					m_loss_weight.push_back(f_temp);
+					m_s_loss_weight.push_back(f_temp);
 				}
 
 				if (matchBool(line, "propagate_down:", &b_temp)){
-					m_propagate_down.push_back(b_temp);
+					m_s_propagate_down.push_back(b_temp);
 				}
 			}
 			// 进入 JParamSpec 参数空间
@@ -64,7 +74,7 @@ namespace jaffe {
 					v_str_temp.pop_back();
 					JParamSpec param_temp;	// 可以有多个 param_spec 参数空间
 					param_temp.SetParam(v_str_temp);
-					m_param.push_back(param_temp);
+					m_s_param.push_back(param_temp);
 					v_str_temp.clear();
 					b_enter_param = false;
 				}
@@ -82,7 +92,7 @@ namespace jaffe {
 					v_str_temp.pop_back();
 					JBlobProto blobs_temp;	// 可以有多个 blobs 参数空间
 					blobs_temp.SetParam(v_str_temp);
-					m_blobs.push_back(blobs_temp);
+					m_s_blobs.push_back(blobs_temp);
 					v_str_temp.clear();
 					b_enter_blobs = false;
 				}
@@ -100,7 +110,7 @@ namespace jaffe {
 					v_str_temp.pop_back();
 					JNetStateRule include_temp;	// 可以有多个 include 参数空间
 					include_temp.SetParam(v_str_temp);
-					m_include.push_back(include_temp);
+					m_s_include.push_back(include_temp);
 					v_str_temp.clear();
 					b_enter_include = false;
 				}
@@ -118,7 +128,7 @@ namespace jaffe {
 					v_str_temp.pop_back();
 					JNetStateRule exclude_temp;	// 可以有多个 exclude 参数空间
 					exclude_temp.SetParam(v_str_temp);
-					m_exclude.push_back(exclude_temp);
+					m_s_exclude.push_back(exclude_temp);
 					v_str_temp.clear();
 					b_enter_exclude = false;
 				}
@@ -126,7 +136,7 @@ namespace jaffe {
 			// 进入 JTransformationParam 参数空间
 			if (line.find("tranform_param {") != string::npos){
 				b_enter_transform_param = true;
-				m_transform_param = new JTransformationParam;
+				m_s_transform_param = new JTransformationParam;
 				left += count_if(line.begin(), line.end(), LPisleft);
 			}
 			else if (b_enter_transform_param){
@@ -135,7 +145,7 @@ namespace jaffe {
 				left -= count_if(line.begin(), line.end(), LPisright);
 				if (left == 0){
 					v_str_temp.pop_back();
-					m_transform_param->SetParam(v_str_temp);
+					m_s_transform_param->SetParam(v_str_temp);
 					v_str_temp.clear();
 					b_enter_transform_param = false;
 				}
@@ -143,7 +153,7 @@ namespace jaffe {
 			// 进入 JLossParam 参数空间
 			if (line.find("loss_param {") != string::npos){
 				b_enter_loss_param = true;
-				m_loss_param = new JLossParam;
+				m_s_loss_param = new JLossParam;
 				left += count_if(line.begin(), line.end(), LPisleft);
 			}
 			else if (b_enter_loss_param){
@@ -152,7 +162,7 @@ namespace jaffe {
 				left -= count_if(line.begin(), line.end(), LPisright);
 				if (left == 0){
 					v_str_temp.pop_back();
-					m_loss_param->SetParam(v_str_temp);
+					m_s_loss_param->SetParam(v_str_temp);
 					v_str_temp.clear();
 					b_enter_loss_param = false;
 				}
@@ -164,40 +174,40 @@ namespace jaffe {
 	}
 
 	bool JLayerParam::ShowSharedParam(){
-		cout << "name: " << m_name << endl;
-		cout << "type:" << m_type << endl;
-		for (int i = 0; i < m_bottom.size(); i++){
-			cout << "bottom[" << i << "]: " << m_bottom.at(i) 
+		cout << "name: " << m_s_name << endl;
+		cout << "type:" << m_s_type << endl;
+		for (int i = 0; i < m_s_bottom.size(); i++){
+			cout << "bottom[" << i << "]: " << m_s_bottom.at(i) 
 				<< endl;
 		}
-		for (int i = 0; i < m_top.size(); i++){
-			cout << "top[" << i << "]: " << m_top.at(i)
+		for (int i = 0; i < m_s_top.size(); i++){
+			cout << "top[" << i << "]: " << m_s_top.at(i)
 				<< endl;
 		}
-		for (int i = 0; i < m_loss_weight.size(); i++){
+		for (int i = 0; i < m_s_loss_weight.size(); i++){
 			cout << "loss_weight[" << i << "]: " << 
-				m_loss_weight.at(i) << endl;
+				m_s_loss_weight.at(i) << endl;
 		}
-		for (int i = 0; i < m_param.size(); i++){
-			m_param.at(i).Show();
+		for (int i = 0; i < m_s_param.size(); i++){
+			m_s_param.at(i).Show();
 		}
-		for (int i = 0; i < m_blobs.size(); i++){
-			m_blobs.at(i).Show();
+		for (int i = 0; i < m_s_blobs.size(); i++){
+			m_s_blobs.at(i).Show();
 		}
-		for (int i = 0; i < m_propagate_down.size(); i++){
+		for (int i = 0; i < m_s_propagate_down.size(); i++){
 			cout << "propagate_down[" << i << "]: " <<
-				m_propagate_down.at(i) << endl;
+				m_s_propagate_down.at(i) << endl;
 		}
-		for (int i = 0; i < m_include.size(); i++){
-			m_include.at(i).Show();
+		for (int i = 0; i < m_s_include.size(); i++){
+			m_s_include.at(i).Show();
 		}
-		for (int i = 0; i < m_exclude.size(); i++){
-			m_exclude.at(i).Show();
+		for (int i = 0; i < m_s_exclude.size(); i++){
+			m_s_exclude.at(i).Show();
 		}
-		if (m_transform_param)
-			m_transform_param->Show();
-		if (m_loss_param)
-			m_loss_param->Show();
+		if (m_s_transform_param)
+			m_s_transform_param->Show();
+		if (m_s_loss_param)
+			m_s_loss_param->Show();
 		return true;
 	}
 } // namespace jaffe

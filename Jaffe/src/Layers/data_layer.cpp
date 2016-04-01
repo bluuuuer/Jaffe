@@ -3,7 +3,7 @@
 namespace jaffe {
 
 	template <typename Dtype>
-	bool JDataLayer<Dtype>::Init(vector<string> param){
+	bool JDataLayer<Dtype>::Init(const vector<string> param){
 		return m_param->SetParam(param);
 	}
 
@@ -11,5 +11,7 @@ namespace jaffe {
 	bool JDataLayer<Dtype>::Show(){
 		return m_param->Show();
 	}
+
+	template class JDataLayer <int>;
 
 } // namespace jaffe

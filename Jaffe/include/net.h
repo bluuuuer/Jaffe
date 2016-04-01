@@ -9,6 +9,7 @@
 #include "vision_layers.h"
 #include "net_param.h"
 #include "data_layers.h"
+#include "layer.h"
 
 using std::string;
 using std::cout;
@@ -38,13 +39,15 @@ namespace jaffe {
 			if (m_pooling_layer_num)
 				delete[] m_pooling_layers;
 
-			delete[] m_param;
+			delete m_param;
 		};
+
+		int bullshit();
 
 		// 分别定义 layer 并设置参数
 		bool Init(const string filename);	
 		// 一次性读入所有参数
-		bool SetFilePath(const string filename); 
+		bool ReadParamFromText(const string filename); 
 		
 
 		JNetParameter GetParame(){ return *m_param; };

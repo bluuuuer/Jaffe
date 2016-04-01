@@ -38,6 +38,7 @@ namespace jaffe {
 		int m_prefetch;
 
 		bool SetUniqueParam(const vector<string> param);
+		bool ShowUniqueParam();
 	};
 }
 #endif

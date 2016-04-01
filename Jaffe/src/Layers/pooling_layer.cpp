@@ -5,7 +5,7 @@ namespace jaffe{
 	template <typename Dtype>
 	bool JPoolingLayer<Dtype>::Init(const vector<string> param){
 		SetParam(param);
-		ReadParam();
+		return ReadParam();
 	}
 
 	template <typename Dtype>
@@ -15,12 +15,14 @@ namespace jaffe{
 	
 	template <typename Dtype>
 	bool JPoolingLayer<Dtype>::ReadParam(){
-
+		return true;
 	}
 
 	template <typename Dtype>
 	bool JPoolingLayer<Dtype>::Show(){
-		m_param->Show();
+		return m_param->Show();
 	}
+
+	template class JPoolingLayer <int>;
 
 } // namespace jaffe

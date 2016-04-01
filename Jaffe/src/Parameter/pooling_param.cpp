@@ -13,7 +13,7 @@ namespace jaffe{
 	bool JPoolingParam::SetParam(const vector<string> param){
 		SetSharedParam(param);
 
-		cout << "Initting Pooling Layer \"" << m_name
+		cout << "Initting Pooling Layer \"" << m_s_name
 			<< "\"..." << endl;
 
 		string line = "";
@@ -87,20 +87,26 @@ namespace jaffe{
 
 	bool JPoolingParam::Show(){
 		cout << endl;
-		cout << "Pooling Layer (" << m_name << "):" << endl;
+		cout << "Pooling Layer (" << m_s_name << "):" << endl;
 		ShowSharedParam();
-		cout << "pool: " << m_pool << endl;
-		cout << "pad: " << m_pad << endl;
-		cout << "pad_h: " << m_pad_h << endl;
-		cout << "pad_w: " << m_pad_w << endl;
-		cout << "kernel_size: " << m_kernel_size << endl;
-		cout << "kernel_h: " << m_kernel_h << endl;
-		cout << "kernel_w: " << m_kernel_w << endl; 
-		cout << "stride: " << m_stride << endl;
-		cout << "stride_h: " << m_stride_h << endl;
-		cout << "stride_w: " << m_stride_w << endl;
-		cout << "engine: " << m_engine << endl;
-		cout << "global_pooling: " << m_global_pooling << endl;
+		ShowUniqueParam();
+		return true;
+	}
+
+	bool JPoolingParam::ShowUniqueParam(){
+		cout << "pooling_param {" << endl;
+		cout << "\tpool: " << m_pool << endl;
+		cout << "\tpad: " << m_pad << endl;
+		cout << "\tpad_h: " << m_pad_h << endl;
+		cout << "\tpad_w: " << m_pad_w << endl;
+		cout << "\tkernel_size: " << m_kernel_size << endl;
+		cout << "\tkernel_h: " << m_kernel_h << endl;
+		cout << "\tkernel_w: " << m_kernel_w << endl; 
+		cout << "\tstride: " << m_stride << endl;
+		cout << "\tstride_h: " << m_stride_h << endl;
+		cout << "\tstride_w: " << m_stride_w << endl;
+		cout << "\tengine: " << m_engine << endl;
+		cout << "\tglobal_pooling: " << m_global_pooling << endl;
 
 		return true;
 	}

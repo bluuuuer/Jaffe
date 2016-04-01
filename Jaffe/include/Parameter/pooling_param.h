@@ -49,6 +49,7 @@ namespace jaffe{
 		bool m_global_pooling;
 
 		bool SetUniqueParam(const vector<string> param);
+		bool ShowUniqueParam();
 	};
 } // namespace jaffe
 #endif

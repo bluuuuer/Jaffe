@@ -11,4 +11,6 @@ namespace jaffe {
 	bool JConvolutionLayer<Dtype>::Show(){
 		return m_param->Show();
 	}
+
+	template class JConvolutionLayer <int>;
 }
