@@ -4,7 +4,18 @@ namespace jaffe {
 
 	template <typename Dtype>
 	bool JConvolutionLayer<Dtype>::Init(const vector<string> param){
+		SetParam(param);
+		return ReadParam();
+	}
+
+	template <typename Dtype>
+	bool JConvolutionLayer<Dtype>::SetParam(const vector<string> param){
 		return m_param->SetParam(param);
+	}
+
+	template <typename Dtype>
+	bool JConvolutionLayer<Dtype>::ReadParam(){
+		return true;
 	}
 
 	template <typename Dtype>
@@ -13,4 +24,5 @@ namespace jaffe {
 	}
 
 	template class JConvolutionLayer <int>;
-}
+
+} // namespace jaffe

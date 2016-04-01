@@ -29,6 +29,10 @@ namespace jaffe {
 
 		bool Init(const vector<string> param);
 
+		bool SetParam(const vector<string> param);
+
+		bool ReadParam();
+
 		virtual bool Show();
 
 	private:

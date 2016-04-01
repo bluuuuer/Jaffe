@@ -28,12 +28,15 @@ namespace jaffe {
 				m_convolution_layer_num++;
 			if (layer_temp.GetType() == "Pooling")
 				m_pooling_layer_num++;
+			if (layer_temp.GetType() == "Softmax")
+				m_softmax_layer_num++;
 		}
 		cout << "Done" << endl << endl;
 
 		cout << "Data Layer: " << m_data_layer_num << endl;
 		cout << "Convolution Layer: " << m_convolution_layer_num << endl;
 		cout << "Pooling Layer: " << m_pooling_layer_num << endl;
+		cout << "Softmax Layer: " << m_softmax_layer_num << endl;
 		cout << endl;
 
 		// 为所有不同类型 layer 开辟内存空间
@@ -47,6 +50,7 @@ namespace jaffe {
 		int i_convolution_layer_idex = 0;
 		int i_data_layer_idex = 0;
 		int i_pooling_layer_idex = 0;
+		int i_softmax_layer_idex = 0;
 		for (int i = 0; i < m_param->GetLayerNum(); i++){
 			JLayer<Dtype> layer_param_temp;
 			layer_param_temp.SetType(m_param->GetLayerParam(i));
@@ -99,13 +103,13 @@ namespace jaffe {
 			//		&m_conv_layers[conv_layer_idex]);
 			//	conv_layer_idex++;
 			//}
-			//if (layer_param_temp.GetType() == "Softmax"){
-			//	m_conv_layers[conv_layer_idex].Init(
-			//		m_param->GetLayerParam(i));
-			//	m_layers.push_back(
-			//		&m_conv_layers[conv_layer_idex]);
-			//	conv_layer_idex++;
-			//}
+			if (layer_param_temp.GetType() == "Softmax"){
+				m_softmax_layers[i_softmax_layer_idex].Init(
+					m_param->GetLayerParam(i));
+				m_layers.push_back(
+					&m_softmax_layers[i_softmax_layer_idex]);
+				i_softmax_layer_idex++;
+			}
 		}
 
 		//for (int i = 0; i < m_layers.size(); i++){

@@ -66,4 +66,22 @@ namespace jaffe {
 		cout << "Done" << endl;
 		return true;
 	}
+
+	bool JSoftmaxParam::Show(){
+		cout << endl;
+		cout << "Softmax Layer (" << m_s_name << ")" << endl;
+		ShowSharedParam();
+		ShowUniqueParam();
+		return true;
+	}
+
+	bool JSoftmaxParam::ShowUniqueParam(){
+		cout << "softmax_param: {" << endl;
+		cout << "\tengine: " << m_engine << endl;
+		cout << "\taxis: " << m_axis << endl;
+		cout << "}" << endl;
+
+		return true;
+	}
+
 } // namespace jaffe

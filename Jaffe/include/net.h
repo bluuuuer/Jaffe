@@ -6,10 +6,11 @@
 #include <iostream>
 #include <fstream>
 
-#include "vision_layers.h"
 #include "net_param.h"
-#include "data_layers.h"
 #include "layer.h"
+#include "vision_layers.h"
+#include "data_layers.h"
+#include "common_layers.h"
 
 using std::string;
 using std::cout;
@@ -39,6 +40,9 @@ namespace jaffe {
 			if (m_pooling_layer_num)
 				delete[] m_pooling_layers;
 
+			if (m_softmax_layer_num)
+				delete[] m_softmax_layers;
+
 			delete m_param;
 		};
 
@@ -63,6 +67,9 @@ namespace jaffe {
 
 		int m_pooling_layer_num;
 		JPoolingLayer<Dtype>* m_pooling_layers;
+
+		int m_softmax_layer_num;
+		JSoftmaxLayer<Dtype>* m_softmax_layers;
 
 
 		JNetParameter* m_param;

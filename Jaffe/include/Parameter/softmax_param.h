@@ -13,6 +13,7 @@ namespace jaffe {
 		};
 		~JSoftmaxParam(){};
 		bool SetParam(const vector<string> param);
+		bool Show();
 
 	private:
 		enum Engine{
@@ -24,6 +25,7 @@ namespace jaffe {
 		int m_axis;
 		
 		bool SetUniqueParam(const vector<string> param);
+		bool ShowUniqueParam();
 	};
 } // namespace jaffe
 #endif
