@@ -1,18 +1,19 @@
 // xw
 // huangshize 2016.04.01
+// 写入了class JImageDataLayer，未测试
 
 #ifndef DATA_LAYERS_H_H
 #define DATA_LAYERS_H_H
 
-#include "..\layer.h"
-#include "..\parameter\data_param.h"
+#include "layer.h"
+#include "data_param.h"
 
 namespace jaffe {
 	template <typename Dtype>
 	class JBaseDataLayer : public JLayer<Dtype>{
 	public:
 		JBaseDataLayer(){};
-		JBaseDataLayer(const JLayerParam& param);  // hsz 读入的参数需要考证
+		JBaseDataLayer(const JLayerParam& param);  // hsz0401 读入的参数需要考证
 		~JBaseDataLayer(){};
 		virtual void DataLayerSetUp(const vector<JBlob<Dtype>*>& bottom, 
 			const vector<JBlob<Dtype>*>& top){}
@@ -27,7 +28,7 @@ namespace jaffe {
 		JBaseFetchingDataLayer(){};
 		~JBaseFetchingDataLayer(){};
 
-		// hsz 说是说执行 DataLayerSetUp(...)
+		// hsz0401 说是说执行 DataLayerSetUp(...)
 		void LayerSetUp(const vector<JBlob<Dtype>*>& bottom,
 			const vector<JBlob<Dtype>*>& top);
 		virtual void Forward(const vector<Blob<Dtype>*>& bottom,
@@ -62,7 +63,7 @@ namespace jaffe {
 
 	};
 
-	// huangshize  用于读取Image的DataLayer，注意继承
+	// hsz0401  用于读取Image的DataLayer，注意继承
 	// 
 	template <typename Dtype>
 	class JImageDataLayer : public JBaseFetchingDataLayer<Dtype>{
@@ -81,6 +82,7 @@ namespace jaffe {
 		void FetchData();
 
 	protected:
+
 		// 考虑覆盖JBaseFetchingDataLayer的同名函数
 		virtual void Forward(const vector<Blob<Dtype>*>& bottom,
 			const vector<Blob<Dtype>*>& top);
