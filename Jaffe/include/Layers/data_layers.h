@@ -42,24 +42,20 @@ namespace jaffe {
 	template <typename Dtype>
 	class JDataLayer : public  JBaseFetchingDataLayer<Dtype>{
 	public:
-
 		JDataLayer(){
 			m_param = new JDataParam;
 		};
-
 		~JDataLayer(){
 			delete m_param;
 		};
 
 		bool Init(const vector<string> param);
-
 		virtual bool Show();
 
 	private:
-
 		JDataParam* m_param;
 
-	};
+	}; // class JDataLayer
 
 	// hsz0401  用于读取Image的DataLayer，注意继承
 	// 

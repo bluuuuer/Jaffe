@@ -67,6 +67,7 @@ namespace jaffe {
 		m_convolution_layers = new JConvolutionLayer<Dtype>[m_convolution_layer_num];
 		m_data_layers = new JDataLayer<Dtype>[m_data_layer_num];
 		m_pooling_layers = new JPoolingLayer<Dtype>[m_pooling_layer_num];
+		m_softmax_layers = new JSoftmaxLayer<Dtype>[m_softmax_layer_num];
 		m_innerproduct_layers = new JInnerProductLayer<Dtype>[m_innerproduct_layer_num];
 		m_relu_layers = new JReLULayer<Dtype>[m_relu_layer_num];
 		m_lrn_layers = new JLRNLayer<Dtype>[m_lrn_layer_num];

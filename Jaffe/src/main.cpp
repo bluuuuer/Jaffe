@@ -9,7 +9,7 @@ int main(){
 
 	JNet<int> net;
 	// 读取配置文件并初始化网络
-	net.Init("train_val.prototxt");
+	net.Init("deploy.prototxt");
 
 	cin.get();
 	

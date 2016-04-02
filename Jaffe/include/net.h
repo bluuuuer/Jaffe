@@ -87,17 +87,17 @@ namespace jaffe {
 		// 用来更好的管理每一个层
 		vector<string> m_layer_names;
 		vector<int> m_layer_id;
-		map<string, int> m_layer_name_id;
+		//map<string, int> m_layer_name_id;
 		// hsz0402 用来管理所有的blobs
-		vector<shared_ptr<JBlob<Dtype>>> m_bolbs;
+		//vector<shared_ptr<JBlob<Dtype>>> m_bolbs;
 		vector<string> m_blob_names;
 		vector<int> m_blob_id;
-		map<string, int> m_blob_name_id;
+		//map<string, int> m_blob_name_id;
 		// hsz0402 用来管理所有的bolbs，分为bottom和top，注意储存的是指针
-		vector<vector<JBlob<Dtype>*>> m_bottom_vecs;
-		vector<vector<id>> m_bottom_id;
-		vector<vector<JBlob<Dtype>*>> m_top_vecs;
-		vector<vector<id>> m_top_id;
+		//vector<vector<JBlob<Dtype>*>> m_bottom_vecs;
+		//vector<vector<id>> m_bottom_id;
+		//vector<vector<JBlob<Dtype>*>> m_top_vecs;
+		//vector<vector<id>> m_top_id;
 
 
 		int m_data_layer_num;
