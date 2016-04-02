@@ -3,6 +3,7 @@
 
 #include "layer.h"
 #include "relu_param.h"
+#include "dropout_param.h"
 
 namespace jaffe {
 	 
@@ -32,6 +33,29 @@ namespace jaffe {
 	private:
 		JReLUParam* m_param;
 	}; // class JReLULayer
+
+	template <typename Dtype>
+	class JDropoutLayer : public JNeuronLayer<Dtype>{
+	public:
+		JDropoutLayer(){
+			m_param = new JDropoutParam;
+		};
+		~JDropoutLayer(){
+			delete[] m_param;
+		};
+
+		bool Init(const vector<string> param);
+		bool SetParam(const vector<string> param);
+		bool Show();
+
+	private:
+		//Blob<unsigned int> m_rand_vec;
+		//Dtype m_threshold;
+		//Dtype m_scale;
+		//unsigned int m_uint_thres;
+
+		JDropoutParam* m_param;
+	}; //
 
 } // namespace jaffe
 

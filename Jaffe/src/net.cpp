@@ -40,6 +40,15 @@ namespace jaffe {
 			if (layer_temp.GetType() == "ReLU"){
 				m_relu_layer_num++;
 			}
+			if (layer_temp.GetType() == "LRN"){
+				m_lrn_layer_num++;
+			}
+			if (layer_temp.GetType() == "Dropout"){
+				m_dropout_layer_num++;
+			}
+			if (layer_temp.GetType() == "Accuracy"){
+				m_accuracy_layer_num++;
+			}
 		}
 
 		cout << "Data Layer: " << m_data_layer_num << endl;
@@ -48,6 +57,9 @@ namespace jaffe {
 		cout << "Softmax Layer: " << m_softmax_layer_num << endl;
 		cout << "InnerProduct Layer: " << m_innerproduct_layer_num << endl;
 		cout << "ReLU Layer: " << m_relu_layer_num << endl;
+		cout << "LRN Layer: " << m_lrn_layer_num << endl;
+		cout << "Dropout Layer: " << m_dropout_layer_num << endl;
+		cout << "Accuracy Layer: " << m_accuracy_layer_num << endl;
 		cout << endl;
 
 		// 为所有不同类型 layer 开辟内存空间
@@ -57,6 +69,9 @@ namespace jaffe {
 		m_pooling_layers = new JPoolingLayer<Dtype>[m_pooling_layer_num];
 		m_innerproduct_layers = new JInnerProductLayer<Dtype>[m_innerproduct_layer_num];
 		m_relu_layers = new JReLULayer<Dtype>[m_relu_layer_num];
+		m_lrn_layers = new JLRNLayer<Dtype>[m_lrn_layer_num];
+		m_dropout_layers = new JDropoutLayer<Dtype>[m_dropout_layer_num];
+		m_accuracy_layers = new JAccuracyLayer<Dtype>[m_accuracy_layer_num];
 		//cout << "Done" << endl << endl;
 
 		// 分别设置所有 layer 的参数
@@ -66,8 +81,12 @@ namespace jaffe {
 		int i_softmax_layer_idex = 0;
 		int i_innerproduct_layer_idex = 0;
 		int i_relu_layer_idex = 0;
+		int i_lrn_layer_idex = 0;
+		int i_dropout_layer_idex = 0;
+		int i_accuracy_layer_idex = 0;
 
 		for (int i = 0; i < m_param->GetLayerNum(); i++){
+			cout << "[" << i + 1 << "]";
 			JLayer<Dtype> layer_param_temp;
 			layer_param_temp.SetType(m_param->GetLayerParam(i));
 			if (layer_param_temp.GetType() == "Data"){
@@ -98,13 +117,13 @@ namespace jaffe {
 					&m_relu_layers[i_relu_layer_idex]);
 				i_relu_layer_idex++;
 			}
-			//if (layer_param_temp.GetType() == "LRN"){
-			//	m_conv_layers[conv_layer_idex].Init(
-			//		m_param->GetLayerParam(i));
-			//	m_layers.push_back(
-			//		&m_conv_layers[conv_layer_idex]);
-			//	conv_layer_idex++;
-			//}
+			if (layer_param_temp.GetType() == "LRN"){
+				m_lrn_layers[i_lrn_layer_idex].Init(
+					m_param->GetLayerParam(i));
+				m_layers.push_back(
+					&m_lrn_layers[i_lrn_layer_idex]);
+				i_lrn_layer_idex++;
+			}
 			if (layer_param_temp.GetType() == "InnerProduct"){
 				m_innerproduct_layers[i_innerproduct_layer_idex].Init(
 					m_param->GetLayerParam(i));
@@ -112,19 +131,26 @@ namespace jaffe {
 					&m_innerproduct_layers[i_innerproduct_layer_idex]);
 				i_innerproduct_layer_idex++;
 			}
-			//if (layer_param_temp.GetType() == "Dropout"){
-			//	m_conv_layers[conv_layer_idex].Init(
-			//		m_param->GetLayerParam(i));
-			//	m_layers.push_back(
-			//		&m_conv_layers[conv_layer_idex]);
-			//	conv_layer_idex++;
-			//}
+			if (layer_param_temp.GetType() == "Dropout"){
+				m_dropout_layers[i_dropout_layer_idex].Init(
+					m_param->GetLayerParam(i));
+				m_layers.push_back(
+					&m_dropout_layers[i_dropout_layer_idex]);
+				i_dropout_layer_idex++;
+			}
 			if (layer_param_temp.GetType() == "Softmax"){
 				m_softmax_layers[i_softmax_layer_idex].Init(
 					m_param->GetLayerParam(i));
 				m_layers.push_back(
 					&m_softmax_layers[i_softmax_layer_idex]);
 				i_softmax_layer_idex++;
+			}
+			if (layer_param_temp.GetType() == "Accuracy"){
+				m_accuracy_layers[i_accuracy_layer_idex].Init(
+					m_param->GetLayerParam(i));
+				m_layers.push_back(
+					&m_accuracy_layers[i_accuracy_layer_idex]);
+				i_accuracy_layer_idex++;
 			}
 		}
 

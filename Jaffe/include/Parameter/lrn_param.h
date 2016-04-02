@@ -5,9 +5,9 @@
 
 namespace jaffe {
 
-	class JLrnParam : public JLayerParam{
+	class JLRNParam : public JLayerParam{
 	public:
-		JLrnParam(){
+		JLRNParam(){
 			m_local_size = 5;
 			m_alpha = 1.0;
 			m_beta = 0.75;
@@ -15,8 +15,9 @@ namespace jaffe {
 			m_k = 1.0;
 			m_engine = DEFAULT;
 		};
-		~JLrnParam(){};
+		~JLRNParam(){};
 		bool SetParam(const vector<string> param);
+		bool Show();
 	private:
 		int m_local_size;
 		float m_alpha;
@@ -35,6 +36,7 @@ namespace jaffe {
 		Engine m_engine;
 
 		bool SetUniqueParam(const vector<string> param);
+		bool ShowUniqueParam();
 	};
 } // namespace jaffe
 #endif

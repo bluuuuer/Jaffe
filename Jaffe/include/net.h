@@ -12,6 +12,7 @@
 #include "data_layers.h"
 #include "common_layers.h"
 #include "neuron_layers.h"
+#include "loss_layers.h"
 
 using std::string;
 using std::cout;
@@ -30,6 +31,9 @@ namespace jaffe {
 			m_softmax_layer_num = 0;
 			m_innerproduct_layer_num = 0;
 			m_relu_layer_num = 0;
+			m_lrn_layer_num = 0;
+			m_dropout_layer_num = 0;
+			m_accuracy_layer_num = 0;
 		};
 
 		~JNet(){
@@ -52,6 +56,15 @@ namespace jaffe {
 			}
 			if (m_relu_layer_num){
 				delete[] m_relu_layers;
+			}
+			if (m_lrn_layer_num){
+				delete[] m_lrn_layers;
+			}
+			if (m_dropout_layer_num){
+				delete[] m_dropout_layers;
+			}
+			if (m_accuracy_layer_num){
+				delete[] m_accuracy_layers;
 			}
 
 			delete m_param;
@@ -87,6 +100,15 @@ namespace jaffe {
 
 		int m_relu_layer_num;
 		JReLULayer<Dtype>* m_relu_layers;
+
+		int m_lrn_layer_num;
+		JLRNLayer<Dtype>* m_lrn_layers;
+
+		int m_dropout_layer_num;
+		JDropoutLayer<Dtype>* m_dropout_layers;
+
+		int m_accuracy_layer_num;
+		JAccuracyLayer<Dtype>* m_accuracy_layers;
 
 		JNetParameter* m_param;
 	};

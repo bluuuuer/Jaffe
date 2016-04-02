@@ -1,19 +1,20 @@
-#include "dropout_param.h"
+#include "accuracy_param.h"
 
 namespace jaffe {
 
-	bool DRPisleft(char c){
+	bool APisleft(char c){
 		return c == '{';
 	}
 
-	bool DRPisright(char c){
+	bool APisright(char c){
 		return c == '}';
 	}
 
-	bool JDropoutParam::SetParam(const vector<string> param){
+	bool JAccuracyParam::SetParam(const vector<string> param){
 		SetSharedParam(param);
-		
-		cout << "Initting Dropout Layer (" << m_s_name << ")...";
+
+		cout << "Initting Accuracy Layer (" << m_s_name
+			<< ")...";
 
 		string line = "";
 		vector<string> v_unique_param;
@@ -22,17 +23,17 @@ namespace jaffe {
 
 		for (int i = 0; i < param.size(); i++){
 			line = param.at(i);
-			if (line.find(" dropout_param") != string::npos){
+			if (line.find("convolution_param {") != string::npos){
 				b_enter = true;
 				i_left += count_if(line.begin(), line.end(),
-					DRPisleft);
+					APisleft);
 			}
 			else if (b_enter){
 				v_unique_param.push_back(line);
 				i_left += count_if(line.begin(), line.end(),
-					DRPisleft);
+					APisleft);
 				i_left -= count_if(line.begin(), line.end(),
-					DRPisright);
+					APisright);
 				if (i_left == 0){
 					v_unique_param.pop_back();
 					SetUniqueParam(v_unique_param);
@@ -46,31 +47,34 @@ namespace jaffe {
 
 		return true;
 	}
-
-	bool JDropoutParam::SetUniqueParam(const vector<string> param){
+	
+	bool JAccuracyParam::SetUniqueParam(const vector<string> param){
 		string line = "";
-
 		for (int i = 0; i < param.size(); i++){
 			line = param.at(i);
 
-			matchFloat(line, "dropout_ratio:", &m_dropout_ratio);
+			matchInt(line, "top_k", &m_top_k);
+			matchInt(line, "axis", &m_axis);
+			matchInt(line, "ignore_label", &m_ignore_label);
 		}
 
 		return true;
 	}
 
-	bool JDropoutParam::Show(){
-		cout << "Dropout Layer (" << m_s_name << endl;
+	bool JAccuracyParam::Show(){
+		cout << endl;
+		cout << "Accuracy Layer (" << m_s_name << "):" << endl;
 		ShowSharedParam();
 		ShowUniqueParam();
 		return true;
 	}
 
-	bool JDropoutParam::ShowUniqueParam(){
-		cout << "dropout_param {" << endl;
-		cout << "\tdropout_ratio: " << m_dropout_ratio << endl;
+	bool JAccuracyParam::ShowUniqueParam(){
+		cout << "accuracy_param {" << endl;
+		cout << "\ttop_k: " << m_top_k << endl;
+		cout << "\taxis: " << m_axis << endl;
+		cout << "\tignore_label: " << m_ignore_label << endl;
 		cout << "}" << endl;
-
 		return true;
 	}
 

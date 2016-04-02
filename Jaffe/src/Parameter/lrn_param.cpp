@@ -10,11 +10,10 @@ namespace jaffe{
 		return c == '}';
 	}
 
-	bool JLrnParam::SetParam(const vector<string> param){
+	bool JLRNParam::SetParam(const vector<string> param){
 		SetSharedParam(param);
 
-		cout << "Initting LRN Layer \"" << m_s_name
-			<< "\"..." << endl;
+		cout << "Initting LRN Layer (" << m_s_name << ")...";
 
 		string line = "";
 		vector<string> v_unique_param;
@@ -43,10 +42,12 @@ namespace jaffe{
 			}
 		}
 
+		cout << "Done" << endl;
+
 		return true;
 	}
 
-	bool JLrnParam::SetUniqueParam(const vector<string> param){
+	bool JLRNParam::SetUniqueParam(const vector<string> param){
 		string line = "";
 
 		for (int i = 0; i < param.size(); i++){
@@ -74,7 +75,27 @@ namespace jaffe{
 			}
 		}
 
-		cout << "Done" << endl;
 		return true;
 	}
+
+	bool JLRNParam::Show(){
+		cout << "LRN Layer (" << m_s_name << ")" << endl;
+		ShowSharedParam();
+		ShowUniqueParam();
+		return true;
+	}
+
+	bool JLRNParam::ShowUniqueParam(){
+		cout << "LRN parameter {" << endl;
+		cout << "\tlocal_size: " << m_local_size << endl;
+		cout << "\talpha: " << m_alpha << endl;
+		cout << "\tbeta: " << m_beta << endl;
+		cout << "\tnorm_region: " << m_norm_region << endl;
+		cout << "\tk: " << m_k << endl;
+		cout << "\tengine: " << m_engine << endl;
+		cout << "}" << endl;
+
+		return true;
+	}
+
 } // namespace jaffe
