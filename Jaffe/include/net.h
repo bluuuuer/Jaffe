@@ -11,6 +11,7 @@
 #include "vision_layers.h"
 #include "data_layers.h"
 #include "common_layers.h"
+#include "neuron_layers.h"
 
 using std::string;
 using std::cout;
@@ -26,22 +27,32 @@ namespace jaffe {
 			m_data_layer_num = 0;
 			m_convolution_layer_num = 0;
 			m_pooling_layer_num = 0;
+			m_softmax_layer_num = 0;
+			m_innerproduct_layer_num = 0;
+			m_relu_layer_num = 0;
 		};
 
 		~JNet(){
 			vector<JLayer<Dtype>*>(m_layers).swap(m_layers);
 
-			if (m_convolution_layer_num)
+			if (m_convolution_layer_num){
 				delete[] m_convolution_layers;
-
-			if (m_data_layer_num)
+			}
+			if (m_data_layer_num){
 				delete[] m_data_layers;
-
-			if (m_pooling_layer_num)
+			}
+			if (m_pooling_layer_num){
 				delete[] m_pooling_layers;
-
-			if (m_softmax_layer_num)
+			}
+			if (m_softmax_layer_num){
 				delete[] m_softmax_layers;
+			}
+			if (m_innerproduct_layer_num){
+				delete[] m_innerproduct_layers;
+			}
+			if (m_relu_layer_num){
+				delete[] m_relu_layers;
+			}
 
 			delete m_param;
 		};
@@ -71,6 +82,11 @@ namespace jaffe {
 		int m_softmax_layer_num;
 		JSoftmaxLayer<Dtype>* m_softmax_layers;
 
+		int m_innerproduct_layer_num;
+		JInnerProductLayer<Dtype>* m_innerproduct_layers;
+
+		int m_relu_layer_num;
+		JReLULayer<Dtype>* m_relu_layers;
 
 		JNetParameter* m_param;
 	};

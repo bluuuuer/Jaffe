@@ -13,8 +13,7 @@ namespace jaffe {
 	bool JDataParam::SetParam(const vector<string> param){
 		SetSharedParam(param);
 
-		cout << "Initting Data Layer \"" << m_s_name << "\"..."
-			<< endl;
+		cout << "Initting Data Layer (" << m_s_name << ")...";
 
 		string line = "";
 		vector<string> v_unique_param;
@@ -43,6 +42,8 @@ namespace jaffe {
 			}
 		}
 
+		cout << "Done" << endl;
+
 		return true;
 	}
 
@@ -69,7 +70,7 @@ namespace jaffe {
 				&m_force_encoded_color);
 			matchInt(line, "prefetch:", &m_prefetch);
 		}
-		cout << "Done" << endl;
+
 		return true;
 
 	}

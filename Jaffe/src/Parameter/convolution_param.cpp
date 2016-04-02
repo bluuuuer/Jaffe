@@ -13,8 +13,8 @@ namespace jaffe {
 	bool JConvolutionParam::SetParam(const vector<string> param){
 		SetSharedParam(param);
 
-		cout << "Initting Convolution Layer \"" << m_s_name
-			<< "\"..." << endl;
+		cout << "Initting Convolution Layer (" << m_s_name
+			<< ")...";
 
 		string line = "";
 		vector<string> v_unique_param;
@@ -42,6 +42,8 @@ namespace jaffe {
 				}
 			}
 		}
+
+		cout << "Done" << endl;
 
 		return true;
 	}
@@ -129,7 +131,6 @@ namespace jaffe {
 			}
 		}
 
-		cout << "Done" << endl;
 		return true;
 	}
 

@@ -10,11 +10,10 @@ namespace jaffe{
 		return c == '}';
 	}
 
-	bool JReluParam::SetParam(const vector<string> param){
+	bool JReLUParam::SetParam(const vector<string> param){
 		SetSharedParam(param);
 
-		cout << "Initting ReLU Layer \"" << m_s_name
-			<< "\"..." << endl;
+		cout << "Initting ReLU Layer (" << m_s_name << ")...";
 
 		string line = "";
 		vector<string> v_unique_param;
@@ -41,12 +40,14 @@ namespace jaffe{
 					b_enter = false;
 				}
 			}
-		}
+		}	
+
+		cout << "Done" << endl;
 
 		return true;
 	}
 
-	bool JReluParam::SetUniqueParam(const vector<string> param){
+	bool JReLUParam::SetUniqueParam(const vector<string> param){
 		string line = "";
 		
 		for (int i = 0; i < param.size(); i++){
@@ -63,8 +64,24 @@ namespace jaffe{
 				}
 			}
 		}
-		
-		cout << "Done" << endl;
+
+		return true;
+	}
+
+	bool JReLUParam::Show(){
+		cout << endl;
+		cout << "ReLU Layer (" << m_s_name << ")" << endl;
+		ShowSharedParam();
+		ShowUniqueParam();
+		return true;
+	}
+
+	bool JReLUParam::ShowUniqueParam(){
+		cout << "relu_param {" << endl;
+		cout << "\tnegative_slope: " << m_negative_slope << endl;
+		cout << "\tengine: " << m_engine << endl;
+		cout << "}" << endl;
+
 		return true;
 	}
 } // namespace jaffe

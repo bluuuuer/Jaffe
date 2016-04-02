@@ -13,8 +13,8 @@ namespace jaffe{
 	bool JPoolingParam::SetParam(const vector<string> param){
 		SetSharedParam(param);
 
-		cout << "Initting Pooling Layer \"" << m_s_name
-			<< "\"..." << endl;
+		cout << "Initting Pooling Layer (" << m_s_name
+			<< ")...";
 
 		string line = "";
 		vector<string> v_unique_param;
@@ -42,6 +42,8 @@ namespace jaffe{
 				}
 			}
 		}
+
+		cout << "Done" << endl;
 
 		return true;
 	}
@@ -81,7 +83,7 @@ namespace jaffe{
 			}
 			matchBool(line, "global_pooling:", &m_global_pooling);
 		}
-		cout << "Done" << endl;
+
 		return true;
 	}
 

@@ -13,8 +13,8 @@ namespace jaffe {
 	bool JSoftmaxParam::SetParam(const vector<string> param){
 		SetSharedParam(param);
 
-		cout << "Initting Softmax Layer \"" << m_s_name
-			<< "\"..." << endl;
+		cout << "Initting Softmax Layer (" << m_s_name
+			<< ")...";
 
 		string line = "";
 		vector<string> v_unique_param;
@@ -42,6 +42,9 @@ namespace jaffe {
 				}
 			}
 		}
+
+		cout << "Done" << endl;
+
 		return true;
 	}
 
@@ -63,7 +66,6 @@ namespace jaffe {
 			matchInt(line, "axis:", &m_axis);
 		}
 
-		cout << "Done" << endl;
 		return true;
 	}
 

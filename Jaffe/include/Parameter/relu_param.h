@@ -5,14 +5,16 @@
 
 namespace jaffe{
 
-	class JReluParam : public JLayerParam{
+	class JReLUParam : public JLayerParam{
 	public:
-		JReluParam(){
+		JReLUParam(){
 			m_negative_slope = 0.0;
 			m_engine = DEFAULT;
 		};
-		~JReluParam(){};
+		~JReLUParam(){};
 		bool SetParam(const vector<string> param);
+		bool Show();
+
 	private:
 		float m_negative_slope;
 		enum Engine{
@@ -23,6 +25,7 @@ namespace jaffe{
 		Engine m_engine;
 
 		bool SetUniqueParam(const vector<string> param);
+		bool ShowUniqueParam();
 	};
 } // namespace jaffe
 #endif
